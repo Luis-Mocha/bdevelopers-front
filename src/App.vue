@@ -1,4 +1,6 @@
 <script>
+import { RouterView } from 'vue-router'
+
 import HeaderComp from './components/HeaderComp.vue';
 
 export default {
@@ -11,11 +13,8 @@ export default {
 </script>
 
 <template>
-
-  <HeaderComp/>
-
-  <h1 class="text-center text-success">Ciao Mondo!</h1>
-
+  <HeaderComp />
+  <router-view />
 </template>
 
 <style lang="scss">

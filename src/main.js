@@ -5,4 +5,7 @@ import App from './App.vue'
 //importo bootstrap js
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js";
 
-createApp(App).mount('#app')
+// importo vue router
+import { router } from './router';
+
+createApp(App).use(router).mount('#app')
