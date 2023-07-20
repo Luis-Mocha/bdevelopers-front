@@ -12,7 +12,7 @@ export default {
         <div>
             <nav class="navbar navbar-expand-sm navbar-light bg-light">
                 <div class="container">
-                    <router-link class="navbar-brand" :to="{ name: 'home' }">My_Developer</router-link>
+                    <div class="navbar-brand">My_Developer</div>
                     <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
                         data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -48,5 +48,9 @@ export default {
     </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.router-link-active {
+    color: rgb(27, 216, 27);
+}
+</style>
 
