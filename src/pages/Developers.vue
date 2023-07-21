@@ -18,12 +18,28 @@ export default {
         this.getProfiles();
         this.getFields();
     },
+    watch: {
+        selectedFields: {
+            handler: 'getProfiles',
+            deep: true
+        }
+    },
     methods: {
         getProfiles() {
-            axios.get(`${this.baseUrlApi}profiles`).then(res => {
+
+            const params = {}
+
+            if (this.selectedFields.length > 0) {
+                params.field_ids = this.selectedFields.join(',')
+            }
+
+
+            axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
                 this.profiles = res.data.profilesData
+
             })
         },
+
         getFields() {
             axios.get(`${this.baseUrlApi}fields`).then(res => {
                 this.fields = res.data.fields
@@ -38,7 +54,8 @@ export default {
     <h1 class="text-center text-success">Sono la pagina Developers</h1>
     <div v-for="(elem, index) in this.fields" :key="index" class="container">
         <div class="form-check">
-            <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`">
+            <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
+                v-model="selectedFields">
             <label class="form-check-label" :for="`field-${elem.id}`">
                 {{ elem.name }}
             </label>
