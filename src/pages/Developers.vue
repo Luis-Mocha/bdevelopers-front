@@ -61,10 +61,11 @@ export default {
             </label>
         </div>
     </div>
+    
     <div class="container">
-        <div v-for="(element, index) in this.profiles" :key="index">
+        <div class="row">
             <!-- Card -->
-            <div class="card" style="width: 18rem;">
+            <div  v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
                 <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
                 <div class="card-body">
                     <div>{{ element.name }}</div>
