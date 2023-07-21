@@ -79,7 +79,7 @@ export default {
                         curriculum</a>
                     <div>Fields:</div>
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
-                    <div class="my-2">Technologies:</div>
+                    <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
                 </div>
             </div>
