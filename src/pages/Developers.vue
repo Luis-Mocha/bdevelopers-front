@@ -108,6 +108,7 @@ export default {
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
                     <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
+                    <div v-for="(elem, index) in element.review_desc" :key="index">{{ elem }}</div>
                 </div>
             </div>
         </div>
