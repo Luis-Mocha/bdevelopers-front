@@ -106,6 +106,10 @@ export default {
             <option value="5" label="5"></option>
         </datalist>
     </div>
+
+    <div v-if="this.profiles.length === 0" class="text-center">
+        <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
+    </div>
     
     <div class="container">
         <div class="row">
@@ -127,7 +131,8 @@ export default {
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
                     <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
-                    <div>Voto medio: {{element.average_vote}}</div>
+                    <div v-if="element.average_vote > 0">Voto medio: {{element.average_vote}}</div>
+                    <!-- <div v-else>no voti</div> -->
                     
                     <!-- <div v-for="(elem, index) in element.review_desc" :key="index">{{ elem }}</div> -->
                 </div>
