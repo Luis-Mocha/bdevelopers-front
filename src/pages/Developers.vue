@@ -12,31 +12,33 @@ export default {
             baseUrlStorage: 'http://127.0.0.1:8000/storage/',
             fields: [],
             selectedFields: [],
-            reviews: [],
-            selectReviews: [],
-            selectNumbReviews: 0
+            selectNumbReviews: 0,
         }
     },
     mounted() {
         this.getProfiles();
         this.getFields();
-        this.getReviews
     },
     watch: {
         selectedFields: {
             handler: 'getProfiles',
             deep: true
-        }
+        },
+        selectNumbReviews: {
+            handler: 'getProfiles',
+            deep: true
+        },
     },
     methods: {
         getProfiles() {
 
-            const params = {}
+            const params = {
+                total_reviews: this.selectNumbReviews
+            }
 
             if (this.selectedFields.length > 0) {
                 params.field_ids = this.selectedFields.join(',')
-            }
-
+            }            
 
             axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
                 this.profiles = res.data.profilesData
@@ -49,12 +51,6 @@ export default {
                 this.fields = res.data.fields
             })
         },
-
-        getReviews(){
-            axios.get(`${this.baseUrlApi}reviews`).then(res => {
-                this.reviews = res.data.reviews
-            })
-        }
     },
 }
 
@@ -77,7 +73,7 @@ export default {
     <div class="container">
         <h4>Filtro per numero di recensioni</h4>
         <label for="n-reviews">Filtro per numero di recensioni</label><br />
-        <input type="range" id="n-reviews" name="n-reviews" list="options" step="5" min="0" max="20"  v-model="selectNumbReviews"/>
+        <input type="range" id="n-reviews" name="n-reviews" list="options" step="5" min="0" max="20"  v-model.number="selectNumbReviews"/>
 
         <datalist id="options">
             <option  value="0" label="0+"></option>
@@ -108,7 +104,7 @@ export default {
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
                     <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
-                    <div v-for="(elem, index) in element.review_desc" :key="index">{{ elem }}</div>
+                    <!-- <div v-for="(elem, index) in element.review_desc" :key="index">{{ elem }}</div> -->
                 </div>
             </div>
         </div>
