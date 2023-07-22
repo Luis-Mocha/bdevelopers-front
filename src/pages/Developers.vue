@@ -13,6 +13,7 @@ export default {
             fields: [],
             selectedFields: [],
             selectNumbReviews: 0,
+            average_vote: ""
         }
     },
     mounted() {
@@ -28,17 +29,25 @@ export default {
             handler: 'getProfiles',
             deep: true
         },
+        average_vote: {
+            handler: 'getProfiles',
+            deep: true
+        },
     },
     methods: {
         getProfiles() {
 
             const params = {
-                total_reviews: this.selectNumbReviews
+                total_reviews: this.selectNumbReviews,
             }
 
+            if (this. average_vote) {
+                params. average_vote = this.average_vote
+            }
+            
             if (this.selectedFields.length > 0) {
                 params.field_ids = this.selectedFields.join(',')
-            }            
+            } 
 
             axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
                 this.profiles = res.data.profilesData
@@ -70,17 +79,31 @@ export default {
             </label>
         </div>
     </div>
+    <!-- filtro Numero recensioni -->
     <div class="container">
-        <h4>Filtro per numero di recensioni</h4>
         <label for="n-reviews">Filtro per numero di recensioni</label><br />
-        <input type="range" id="n-reviews" name="n-reviews" list="options" step="5" min="0" max="20"  v-model.number="selectNumbReviews"/>
+        <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews"/>
 
-        <datalist id="options">
+        <datalist id="n-options">
             <option  value="0" label="0+"></option>
             <option value="5" label="5+"></option>
             <option value="10" label="10+"></option>
             <option value="15" label="15+"></option>
             <option value="20" label="20+"></option>
+        </datalist>
+    </div>
+    <!-- filtro Voti recensioni -->
+    <div class="container">
+        <label for="avg-reviews">Filtro per voto medio</label><br />
+        <input type="range" id="avg-reviews" name="avg-reviews" list="avg-options" step="1" min="0" max="5" v-model.number="average_vote"/>
+
+        <datalist id="avg-options">
+            <option value="0" label="0"></option>
+            <option value="1" label="1"></option>
+            <option value="2" label="2"></option>
+            <option value="3" label="3"></option>
+            <option value="4" label="4"></option>
+            <option value="5" label="5"></option>
         </datalist>
     </div>
     
@@ -104,6 +127,8 @@ export default {
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
                     <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
+                    <div>Voto medio: {{element.average_vote}}</div>
+                    
                     <!-- <div v-for="(elem, index) in element.review_desc" :key="index">{{ elem }}</div> -->
                 </div>
             </div>
