@@ -116,25 +116,31 @@ export default {
             <!-- Card -->
             <div  v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
                 <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
+
+                
                 <div class="card-body">
                     <div>{{ element.name }}</div>
                     <div>{{ element.surname }}</div>
                     <div>{{ element.birth_date }}</div>
-                    <div>{{ element.address }}</div>
+                    <!-- <div>{{ element.address }}</div>
                     <div>{{ element.phone_number }}</div>
                     <div>{{ element.email }}</div>
                     <a>{{ element.github_url }}</a><br>
-                    <a>{{ element.linkedin_url }}</a><br>
-                    <a :href="`${baseUrlStorage}${element.curriculum}`" download target="_blank">Scarica il tuo
-                        curriculum</a>
+                    <a>{{ element.linkedin_url }}</a><br> -->
+                    <a :href="`${baseUrlStorage}${element.curriculum}`" download target="_blank">Scarica il tuo curriculum</a>
+
                     <div>Fields:</div>
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
+
                     <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
-                    <div v-if="element.average_vote > 0">Voto medio: {{element.average_vote}}</div>
-                    <!-- <div v-else>no voti</div> -->
                     
-                    <!-- <div v-for="(elem, index) in element.review_desc" :key="index">{{ elem }}</div> -->
+                    <div v-if="element.average_vote > 0">Voto medio: {{element.average_vote}}</div>
+                    
+                    <router-link :to="{name: 'singleDeveloper', params: {slug: element.email} } " >
+                        <button>+</button>
+                    </router-link>
+
                 </div>
             </div>
         </div>

@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
 import AppHome from './pages/AppHome.vue';
 import Developers from './pages/Developers.vue';
+import SingleDeveloper from './pages/SingleDeveloper.vue';
+
+
 // import PostList from './pages/PostList.vue';
 const router = createRouter({
     history: createWebHistory(),
@@ -15,11 +19,12 @@ const router = createRouter({
             name: 'developers',
             component: Developers
         },
-        // {
-        //     path: '/blog',
-        //     name: 'posts',
-        //     component: PostList
-        // },
+        // nuova rotta per la show
+        {
+            path: '/Developer/:slug',
+            name: 'singleDeveloper',
+            component: SingleDeveloper
+        },
     ]
 });
 export { router };
