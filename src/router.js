@@ -1,6 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
 import AppHome from './pages/AppHome.vue';
 import Developers from './pages/Developers.vue';
+import SingleDeveloper from './pages/SingleDeveloper.vue';
+import NotFound from './pages/NotFound.vue';
+
+
 // import PostList from './pages/PostList.vue';
 const router = createRouter({
     history: createWebHistory(),
@@ -15,11 +20,18 @@ const router = createRouter({
             name: 'developers',
             component: Developers
         },
-        // {
-        //     path: '/blog',
-        //     name: 'posts',
-        //     component: PostList
-        // },
+        // nuova rotta per la show
+        {
+            path: '/profiles/:slug',
+            name: 'singleDeveloper',
+            component: ()=> import('./pages/SingleDeveloper.vue')
+        },
+        // in caso di errore Show
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'notFound',
+            component: NotFound
+        },
     ]
 });
 export { router };
