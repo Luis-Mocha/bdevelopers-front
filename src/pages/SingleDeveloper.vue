@@ -8,14 +8,23 @@ export default {
             baseUrlApi: 'http://127.0.0.1:8000/api/',
             baseUrlStorage: 'http://127.0.0.1:8000/storage/',
             singleProfile: null,
+            review:{
+                profile_id: '',
+                name:'',
+                surname:'',
+                date: '',
+                vote:'',
+                description:'' 
+            }
         }
     },
     beforeMount() {
         this.getSingleProfile();
     },
-    // mounted() {
-    //     this.getSingleProfile();
-    // },
+    mounted() {
+        this.review.profile_id = this.singleProfile.profile_id;
+        this.review.date = this.getDate();
+    },
     methods: {
 
         getSingleProfile() {
@@ -37,6 +46,35 @@ export default {
                         }
                     })
         },
+
+        getDate(){
+            let date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            let today = year + "-" + month + "-" + day;
+            document.getElementById("input-date").value = today;
+             return today;
+        },
+
+        submitReview() {
+        // Effettua una chiamata API POST al backend Laravel
+        axios.post(`${this.baseUrlApi}reviews/store`, this.review)
+        .then(response => {
+          console.log('Recensione salvata con successo!');
+          // Effettua eventuali azioni aggiuntive dopo aver salvato la recensione
+          window.location.reload();
+        })
+        .catch(error => {
+          console.error('Errore durante il salvataggio della recensione:', error);
+        });
+        
+    }
     },
 }
 
@@ -61,6 +99,45 @@ export default {
         <!-- Recensioni -->
         <div>
             <div>voto medio: {{ parseFloat(singleProfile.average_vote).toFixed(1) }}</div>
+            <!-- offcanvas recensioni -->
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Scrivi un recensione</button>
+
+            <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasRightLabel">La tua recensione</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form  @submit.prevent="submitReview">
+                        <div>
+                            <label for="input-name">Nome</label>
+                            <input id="input-name" type="text" v-model="this.review.name" required>
+                        </div>
+                        <div>
+                            <label for="input-surname">Cognome</label>
+                            <input id="input-surname" type="text" v-model="this.review.surname" required>
+                        </div>
+                        <div>
+                            <input id="input-date" type="date" hidden disabled  required>
+                        </div>
+                        <div>
+                            <label for="select-vote">Voto</label>
+                            <select name="vote" id="select-vote" v-model="this.review.vote" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="input-desc">Recensione</label>
+                            <textarea id="input-desc" rows="4" cols="50" v-model="this.review.description" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-3">Invia recensione</button>
+                    </form>
+                </div>
+            </div>
 
             <h2 class="mt-4 mb-2">RECENSIONI</h2>
             <div v-if="singleProfile.reviews == null">
