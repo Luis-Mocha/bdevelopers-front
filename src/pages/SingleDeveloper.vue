@@ -1,23 +1,21 @@
 <script>
 import axios from 'axios';
+
 export default {
     name: 'SingleDeveloper',
-    components: {
-
-    },
     data() {
         return {
-            singleProfile: null,
             baseUrlApi: 'http://127.0.0.1:8000/api/',
             baseUrlStorage: 'http://127.0.0.1:8000/storage/',
+            singleProfile: null,
         }
     },
-    // beforeMount() {
-    //     this.getSingleProfile();
-    // },
-    created() {
+    beforeMount() {
         this.getSingleProfile();
     },
+    // mounted() {
+    //     this.getSingleProfile();
+    // },
     methods: {
         
         getSingleProfile() {
