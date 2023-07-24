@@ -59,6 +59,9 @@ export default {
         <a :href="`${baseUrlStorage}${singleProfile.curriculum}`" target="_blank" rel="noopener noreferrer">Scarica il
             curriculum</a>
         <h2 class="mt-4 mb-2">RECENSIONI</h2>
+        <div v-if="singleProfile.review_desc == null">
+            Non ci sono recensioni
+        </div>
         <ul>
             <div v-for="(elem, index) in singleProfile.review_desc" :key="index">
 
