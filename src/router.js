@@ -24,7 +24,7 @@ const router = createRouter({
         {
             path: '/profiles/:slug',
             name: 'singleDeveloper',
-            component: SingleDeveloper
+            component: ()=> import('./pages/SingleDeveloper.vue')
         },
         // in caso di errore Show
         {
