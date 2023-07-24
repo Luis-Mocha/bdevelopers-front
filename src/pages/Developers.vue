@@ -13,7 +13,7 @@ export default {
             fields: [],
             selectedFields: [],
             selectNumbReviews: 0,
-            average_vote: ""
+            average_vote: 0
         }
     },
     mounted() {
