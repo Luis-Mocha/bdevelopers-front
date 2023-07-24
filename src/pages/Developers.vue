@@ -41,13 +41,13 @@ export default {
                 total_reviews: this.selectNumbReviews,
             }
 
-            if (this. average_vote) {
-                params. average_vote = this.average_vote
+            if (this.average_vote) {
+                params.average_vote = this.average_vote
             }
-            
+
             if (this.selectedFields.length > 0) {
                 params.field_ids = this.selectedFields.join(',')
-            } 
+            }
 
             axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
                 this.profiles = res.data.profilesData
@@ -82,10 +82,11 @@ export default {
     <!-- filtro Numero recensioni -->
     <div class="container">
         <label for="n-reviews">Filtro per numero di recensioni</label><br />
-        <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews"/>
+        <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20"
+            v-model.number="selectNumbReviews" />
 
         <datalist id="n-options">
-            <option  value="0" label="0+"></option>
+            <option value="0" label="0+"></option>
             <option value="5" label="5+"></option>
             <option value="10" label="10+"></option>
             <option value="15" label="15+"></option>
@@ -95,7 +96,8 @@ export default {
     <!-- filtro Voti recensioni -->
     <div class="container">
         <label for="avg-reviews">Filtro per voto medio</label><br />
-        <input type="range" id="avg-reviews" name="avg-reviews" list="avg-options" step="1" min="0" max="5" v-model.number="average_vote"/>
+        <input type="range" id="avg-reviews" name="avg-reviews" list="avg-options" step="1" min="0" max="5"
+            v-model.number="average_vote" />
 
         <datalist id="avg-options">
             <option value="0" label="0"></option>
@@ -110,14 +112,14 @@ export default {
     <div v-if="this.profiles.length === 0" class="text-center">
         <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
     </div>
-    
+
     <div class="container">
         <div class="row">
             <!-- Card -->
-            <div  v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
+            <div v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
                 <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
 
-                
+
                 <div class="card-body">
                     <div>{{ element.name }}</div>
                     <div>{{ element.surname }}</div>
@@ -127,17 +129,18 @@ export default {
                     <div>{{ element.email }}</div>
                     <a>{{ element.github_url }}</a><br>
                     <a>{{ element.linkedin_url }}</a><br> -->
-                    <a :href="`${baseUrlStorage}${element.curriculum}`" download target="_blank">Scarica il tuo curriculum</a>
+                    <a :href="`${baseUrlStorage}${element.curriculum}`" download target="_blank">Scarica il tuo
+                        curriculum</a>
 
                     <div>Fields:</div>
                     <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
 
                     <div class="mt-2">Technologies:</div>
                     <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
-                    
-                    <div v-if="element.average_vote > 0">Voto medio: {{element.average_vote}}</div>
-                    
-                    <router-link :to="{name: 'singleDeveloper', params: {slug: element.id} } " >
+
+                    <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
+
+                    <router-link :to="{ name: 'singleDeveloper', params: { slug: element.profile_id } }">
                         <button>+</button>
                     </router-link>
 
@@ -148,22 +151,20 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
 datalist {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  writing-mode: vertical-lr;
-  width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    writing-mode: vertical-lr;
+    width: 200px;
 }
 
 option {
-  padding: 0;
+    padding: 0;
 }
 
 input[type="range"] {
-  width: 200px;
-  margin: 0;
+    width: 200px;
+    margin: 0;
 }
-
 </style>
