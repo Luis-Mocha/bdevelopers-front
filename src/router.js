@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AppHome from './pages/AppHome.vue';
 import Developers from './pages/Developers.vue';
 import SingleDeveloper from './pages/SingleDeveloper.vue';
+import NotFound from './pages/NotFound.vue';
 
 
 // import PostList from './pages/PostList.vue';
@@ -21,9 +22,15 @@ const router = createRouter({
         },
         // nuova rotta per la show
         {
-            path: '/Developer/:slug',
+            path: '/profiles/:slug',
             name: 'singleDeveloper',
             component: SingleDeveloper
+        },
+        // in caso di errore Show
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'notFound',
+            component: NotFound
         },
     ]
 });

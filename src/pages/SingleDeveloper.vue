@@ -7,34 +7,33 @@ export default {
     },
     data() {
         return {
-            profile: [],
+            singleProfile: null,
             baseUrlApi: 'http://127.0.0.1:8000/api/',
             baseUrlStorage: 'http://127.0.0.1:8000/storage/',
         }
     },
-    mounted() {
-        // this.getProfiles();
-    },
-    watch: {
+    beforeMount() {
+        this.getSingleProfile();
     },
     methods: {
-        getProfiles() {
+        
+        getSingleProfile() {
 
-            const params = {
-                total_reviews: this.selectNumbReviews,
+            axios.get(`${this.baseUrlApi}profiles/${this.$route.params.slug}`)
+            .then((response) => {
+                console.log(response.data.profile);
+
+                this.singleProfile = response.data.profile;
+                
+                // sintassi try and catch
             }
-
-            if (this. average_vote) {
-                params. average_vote = this.average_vote
-            }
-            
-            if (this.selectedFields.length > 0) {
-                params.field_ids = this.selectedFields.join(',')
-            } 
-
-            axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
-                this.profiles = res.data.profilesData
-
+            , error => {
+                if (error.response.status === 404) {
+                    // console.log(error.reponse.status);
+                    this.$router.push({ name: 'notFound' })
+                } else {
+                    // qualunque altro errore
+                }
             })
         },
     },
@@ -47,7 +46,9 @@ export default {
     <h1 class="text-center text-success">Show Developer</h1>
     
     <div class="container">
-        hello
+        <div> {{ singleProfile.name }} </div>
+        <div> {{ singleProfile.surname }} </div>
+
     </div>
 
 </template>
