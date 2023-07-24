@@ -56,22 +56,50 @@ export default {
         <div> {{ singleProfile.github_url }} </div>
         <div> {{ singleProfile.linkedin_url }} </div>
         <div> {{ singleProfile.performance }} </div>
-        <a :href="`${baseUrlStorage}${singleProfile.curriculum}`" target="_blank" rel="noopener noreferrer">Scarica il
-            curriculum</a>
-        <h2 class="mt-4 mb-2">RECENSIONI</h2>
-        <div v-if="singleProfile.review_desc == null">
-            Non ci sono recensioni
-        </div>
-        <ul>
-            <div v-for="(elem, index) in singleProfile.review_desc" :key="index">
+        <a :href="`${baseUrlStorage}${singleProfile.curriculum}`" target="_blank" rel="noopener noreferrer">Scarica il curriculum</a>
 
-                <li>{{ elem }}</li>
-                <!-- <div>{{ elem.review_name }}</div> -->
-                <!-- <div>{{ elem.review_name }}</div> -->
+        <!-- Recensioni -->
+        <div>
+            <div>voto medio: {{ parseFloat(singleProfile.average_vote).toFixed(1) }}</div>
+
+            <h2 class="mt-4 mb-2">RECENSIONI</h2>
+            <div v-if="singleProfile.reviews == null">
+                Non ci sono recensioni
             </div>
-        </ul>
+            
+            <div v-for="(elem, index) in singleProfile.reviews" :key="index" class="border mb-2">
+                <!-- nome e cognome -->
+                <div>
+                    <span class="me-1">{{ elem.name }}</span>
+                    <span>{{ elem.surname }}</span>
+                </div>
+
+                <!-- data -->
+                <div>
+                    <span>Data:</span>
+                    <div>{{ elem.date.split('-').reverse().join('-') }}</div>  
+                </div>
+
+                <!-- voto -->
+                <div>Voto: {{ elem.vote }}</div>
+                <span v-for="i in 5" :key="i">
+                        <i :class=" i <= elem.vote ? 'fa-solid' : 'fa-regular' " class="fa-star text-warning"></i>
+                </span>
+                <!-- descrizione -->
+                <div>
+                    <i class="fa-solid fa-quote-left"></i> 
+                    {{ elem.description }} 
+                    <i class="fa-solid fa-quote-right"></i>
+                </div>
+            </div>
+        </div>
+        
 
     </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    // .fa-star {
+    //     color: rgba(206, 154, 12, 0.815);
+    // }
+</style>
