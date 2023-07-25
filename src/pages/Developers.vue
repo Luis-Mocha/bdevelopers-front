@@ -16,6 +16,9 @@ export default {
             average_vote: 0
         }
     },
+    created() {
+        this.selectedFields = this.$route.query.id;
+    },
     mounted() {
         this.getProfiles();
         this.getFields();
