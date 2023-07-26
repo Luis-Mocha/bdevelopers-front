@@ -13,11 +13,11 @@ export default {
             fields: [],
             selectedFields: [],
             selectNumbReviews: 0,
-            average_vote: 0
+            average_vote: 0,
         }
     },
     created() {
-        this.selectedFields = this.$route.query.id;
+        this.controlFields();
     },
     mounted() {
         this.getProfiles();
@@ -38,6 +38,13 @@ export default {
         },
     },
     methods: {
+        // funzione per controllare se ci sono fields preselzionati dalla home
+        controlFields() {
+            if (this.$route.query.id) {
+                this.selectedFields = this.$route.query.id;
+            }
+        },
+
         getProfiles() {
 
             const params = {
@@ -76,7 +83,7 @@ export default {
     <div v-for="(elem, index) in this.fields" :key="index" class="container">
         <div class="form-check">
             <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
-                v-model="selectedFields">
+            v-model="selectedFields">
             <label class="form-check-label" :for="`field-${elem.id}`">
                 {{ elem.name }}
             </label>
