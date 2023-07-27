@@ -83,7 +83,7 @@ export default {
     <div v-for="(elem, index) in this.fields" :key="index" class="container">
         <div class="form-check">
             <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
-            v-model="selectedFields">
+                v-model="selectedFields">
             <label class="form-check-label" :for="`field-${elem.id}`">
                 {{ elem.name }}
             </label>

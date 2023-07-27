@@ -29,6 +29,10 @@ export default {
                             <!-- <li class="nav-item">
                                 <router-link class="nav-link" :to="{ name: 'contact' }">Contact</router-link>
                             </li> -->
+                            <li class="nav-item">
+                                <a href="http://127.0.0.1:8000/" target="_blank" class="nav-link ">Sviluppi? Iscriviti
+                                    qua!</a>
+                            </li>
                         </ul>
                         <!-- <ul class="navbar-nav">
                             <li class="nav-item">
