@@ -45,6 +45,21 @@ export default {
             }
         },
 
+        updateUrlParams() {
+    const queryParams = {};
+    if (this.selectedFields.length > 0) {
+      queryParams.id = this.selectedFields.join(',');
+    }
+    if (this.selectNumbReviews > 0) {
+      queryParams.selectNumbReviews = this.selectNumbReviews;
+    }
+    if (this.average_vote > 0) {
+      queryParams.average_vote = this.average_vote;
+    }
+
+    this.$router.replace({ query: queryParams });
+  },
+
         getProfiles() {
 
             const params = {
@@ -60,7 +75,8 @@ export default {
             }
 
             axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
-                this.profiles = res.data.profilesData
+                this.profiles = res.data.profilesData;
+                this.updateUrlParams();
 
             })
         },
