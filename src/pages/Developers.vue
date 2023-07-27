@@ -150,7 +150,7 @@ export default {
 
                     <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
 
-                    <router-link :to="{ name: 'singleDeveloper', params: { slug: element.profile_id } }">
+                    <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }">
                         <button>+</button>
                     </router-link>
 

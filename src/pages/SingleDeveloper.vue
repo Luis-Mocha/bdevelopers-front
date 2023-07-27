@@ -37,7 +37,7 @@ export default {
 
         getSingleProfile() {
 
-            axios.get(`${this.baseUrlApi}profiles/${this.$route.params.slug}`)
+            axios.get(`${this.baseUrlApi}profiles/${this.$route.params.dev_id}`)
                 .then((response) => {
                     console.log(response.data.profile);
 

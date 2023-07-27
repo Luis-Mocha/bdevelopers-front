@@ -22,7 +22,7 @@ const router = createRouter({
         },
         // nuova rotta per la show
         {
-            path: '/profiles/:slug',
+            path: '/developer/:dev_id',
             name: 'singleDeveloper',
             component: ()=> import('./pages/SingleDeveloper.vue')
         },
