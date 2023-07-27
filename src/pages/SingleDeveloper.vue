@@ -225,7 +225,7 @@ export default {
                 <!-- data -->
                 <div>
                     <span>Data:</span>
-                    <div>{{ elem.date.split('-').reverse().join('-') }}</div>
+                    <div>{{ elem.date.split('-').reverse().join('/') }}</div>
                 </div>
 
                 <!-- voto -->
