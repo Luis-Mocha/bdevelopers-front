@@ -42,25 +42,35 @@ export default {
     },
     methods: {
         // funzione per controllare se ci sono fields preselzionati dalla home
+        // controlFields() {
+        //     if (this.$route.query.id) {
+        //         this.selectedFields = this.$route.query.id;
+        //     }
+        // },
         controlFields() {
-            if (this.$route.query.id) {
-                this.selectedFields = this.$route.query.id;
-            }
+            const preselectedFields = this.$route.query.fields;
+            this.selectedFields = preselectedFields ? preselectedFields.split(',').map(num => parseInt(num)) : [];
+
+            this.selectNumbReviews = this.$route.query.numReviews;
+
+            this.average_vote = this.$route.query.avgVote;
+
+            console.log(preselectedFields, this.selectedFields);
         },
 
         updateUrlParams() {
             const queryParams = {};
             if (this.selectedFields.length > 0) {
-            queryParams.id = this.selectedFields.join(',');
+            queryParams.fields = this.selectedFields.join(',');
             }
             if (this.selectNumbReviews > 0) {
-            queryParams.selectNumbReviews = this.selectNumbReviews;
+            queryParams.numReviews = this.selectNumbReviews;
             }
             if (this.average_vote > 0) {
-            queryParams.average_vote = this.average_vote;
+            queryParams.avgVote = this.average_vote;
             }
 
-            this.$router.replace({ query: queryParams });
+            this.$router.push({ query: queryParams });
         },
 
         getProfiles() {
@@ -82,8 +92,7 @@ export default {
                 this.profilesTotal = res.data.profilesTotal;
                 this.profilesFiltered = res.data.profilesFiltered;
 
-                // this.updateUrlParams();
-                // ?id=1&id=2
+                this.updateUrlParams();
             })
         },
 
@@ -148,18 +157,17 @@ export default {
                 <option value="5" label="5"></option>
             </datalist>
         </div>
-
     </div>
     
-
     <!-- Index profili -->
     <div class="container">
 
-        <div v-if="this.profiles.length === 0" class="text-center"> <!-- SE non ci sono risultati -->
+        <!-- SE non ci sono risultati -->
+        <div v-if="this.profiles.length === 0" class="text-center"> 
             <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
         </div>
 
-        <!-- statistiche -->
+        <!-- numero risultati filtrati -->
         <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0">
             La tua ricerca ha portato {{ this.profilesFiltered }} risultati
         </div>
