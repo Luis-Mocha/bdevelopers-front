@@ -41,12 +41,7 @@ export default {
         },
     },
     methods: {
-        // funzione per controllare se ci sono fields preselzionati dalla home
-        // controlFields() {
-        //     if (this.$route.query.id) {
-        //         this.selectedFields = this.$route.query.id;
-        //     }
-        // },
+        // funzione per controllare se ci sono filtri preselezionati al caricamento della pagina
         controlFields() {
             const preselectedFields = this.$route.query.fields;
             this.selectedFields = preselectedFields ? preselectedFields.split(',').map(num => parseInt(num)) : [];
@@ -112,110 +107,142 @@ export default {
 </script>
 
 <template>
-    <h1 class="text-center text-success">Cerca il tuo Sviluppatore</h1>
+    <div class="intestazione">
+        <h1 class="text-center text-success">Cerca il tuo Sviluppatore</h1>
 
-    <div class="text-end pe-5">Trovalo tra i nostri {{ this.profilesTotal }} talenti!</div>
-    <!-- sezione filtri -->
-    <div class="container border my-4">
-
-        <!-- fields -->
-        <div>
-            <div>Filtro specializzazione</div>
-
-            <div v-for="(elem, index) in this.fields" :key="index" class="container">
-                <div class="form-check">
-                    <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
-                        v-model="selectedFields">
-                    <label class="form-check-label" :for="`field-${elem.id}`">
-                        {{ elem.name }}
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <!-- filtro Numero recensioni -->
-        <div>
-            <label for="n-reviews">Filtro per numero di recensioni</label><br />
-            <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews" />
-
-            <datalist id="n-options">
-                <option value="0" label="0+"></option>
-                <option value="5" label="5+"></option>
-                <option value="10" label="10+"></option>
-                <option value="15" label="15+"></option>
-                <option value="20" label="20+"></option>
-            </datalist>
-        </div>
-        <!-- filtro Voti recensioni -->
-        <div>
-            <div>
-                <span>Filtro per voto medio:</span>
-                <span v-if="this.average_vote > 0" @click="selezionaVotoMedio(null)" class="text-secondary ms-3 fst-italic">cancella</span>
-            </div>
-            <span v-for="voto in 5" :key="key">
-                    <i :class="voto <= this.average_vote ? 'fa-solid' : 'fa-regular'" class="fa-star text-warning me-2" @click="selezionaVotoMedio(voto)"></i>
-            </span>
-        </div>
-
+        <div class="text-end pe-5">Trovalo tra i nostri {{ this.profilesTotal }} talenti!</div>
     </div>
     
-    <!-- Index profili -->
-    <div class="container">
 
-        <!-- SE non ci sono risultati -->
-        <div v-if="this.profiles.length === 0" class="text-center"> 
-            <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
+    <!-- contenitore filtri e cards -->
+    <div class="container-filter-cards">
+    
+        <!-- sezione filtri -->
+        <div class="filter-section">
+
+            <!-- fields -->
+            <div>
+                <div>Filtro specializzazione</div>
+
+                <div v-for="(elem, index) in this.fields" :key="index" class="container">
+                    <div class="form-check">
+                        <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
+                            v-model="selectedFields">
+                        <label class="form-check-label" :for="`field-${elem.id}`">
+                            {{ elem.name }}
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- filtro Numero recensioni -->
+            <div>
+                <label for="n-reviews">Filtro per numero di recensioni</label><br />
+                <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews" />
+
+                <datalist id="n-options">
+                    <option value="0" label="0+"></option>
+                    <option value="5" label="5+"></option>
+                    <option value="10" label="10+"></option>
+                    <option value="15" label="15+"></option>
+                    <option value="20" label="20+"></option>
+                </datalist>
+            </div>
+            <!-- filtro Voti recensioni -->
+            <div>
+                <div>
+                    <span>Filtro per voto medio:</span>
+                    <span v-if="this.average_vote > 0" @click="selezionaVotoMedio(null)" class="text-secondary ms-3 fst-italic">cancella</span>
+                </div>
+                <span v-for="voto in 5" :key="key">
+                        <i :class="voto <= this.average_vote ? 'fa-solid' : 'fa-regular'" class="fa-star text-warning me-2" @click="selezionaVotoMedio(voto)"></i>
+                </span>
+            </div>
+
         </div>
+        
+        <!-- Index profili -->
+        <div class="cards-section">
 
-        <!-- numero risultati filtrati -->
-        <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0">
-            La tua ricerca ha portato {{ this.profilesFiltered }} risultati
-        </div>
+            <!-- SE non ci sono risultati -->
+            <div v-if="this.profiles.length === 0" class="text-center"> 
+                <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
+            </div>
 
-        <div class="row">
-            <!-- Card -->
-            <div v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
-                <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
+            <!-- numero risultati filtrati -->
+            <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0">
+                La tua ricerca ha portato {{ this.profilesFiltered }} risultati
+            </div>
+
+            <div class="row">
+                <!-- Card -->
+                <div v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
+                    <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
 
 
-                <div class="card-body">
-                    <div>{{ element.name }}</div>
-                    <div>{{ element.surname }}</div>
-                    <div>{{ element.birth_date }}</div>
+                    <div class="card-body">
+                        <div>{{ element.name }}</div>
+                        <div>{{ element.surname }}</div>
+                        <div>{{ element.birth_date }}</div>
 
-                    <div>Fields:</div>
-                    <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
+                        <div>Fields:</div>
+                        <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
 
-                    <div class="mt-2">Technologies:</div>
-                    <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
+                        <div class="mt-2">Technologies:</div>
+                        <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
 
-                    <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
+                        <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
 
-                    <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }">
-                        <button>Come link metterei tuta la card</button>
-                    </router-link>
+                        <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }">
+                            <button>Come link metterei tuta la card</button>
+                        </router-link>
 
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <style lang="scss" scoped>
-datalist {
-    display: flex;
-    // flex-direction: column;
-    justify-content: space-between;
-    // writing-mode: vertical-lr;
-    width: 200px;
-}
+    // lo header è di 60px
+    .intestazione {
+        height: 60px;
+        h1 {
+            margin: 0;
+        }
+    }
+    .container-filter-cards {
+        height: calc(100vh - 120px);
+        display: flex;
 
-option {
-    padding: 0;
-}
+        .filter-section {
+            min-width: 350px;
+            border-right: 2px solid green;
+        }
 
-input[type="range"] {
-    width: 200px;
-    margin: 0;
-}
+        .cards-section {
+            overflow: auto;
+        }
+    }
+
+
+    datalist {
+        display: flex;
+        // flex-direction: column;
+        justify-content: space-between;
+        // writing-mode: vertical-lr;
+        width: 200px;
+    }
+
+    option {
+        padding: 0;
+    }
+
+    input[type="range"] {
+        width: 200px;
+        margin: 0;
+    }
+
 </style>
