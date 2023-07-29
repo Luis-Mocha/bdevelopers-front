@@ -40,9 +40,6 @@ export default {
                 this.fields = res.data.fields
             })
         },
-        // goSelectedFields() {
-        //     this.$router.push({ path: '/developers', query: { id: this.selectedFields } })
-        // }
         goSelectedFields() {
             let paramsFields = this.selectedFields.join(',');
             this.$router.push({name: 'developers', query: { fields: paramsFields } })
