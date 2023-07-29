@@ -8,8 +8,11 @@ export default {
     data() {
         return {
             profiles: [],
+            profilesTotal: null,
+            profilesFiltered: null,
             baseUrlApi: 'http://127.0.0.1:8000/api/',
             baseUrlStorage: 'http://127.0.0.1:8000/storage/',
+            // filtri
             fields: [],
             selectedFields: [],
             selectNumbReviews: 0,
@@ -20,8 +23,8 @@ export default {
         this.controlFields();
     },
     mounted() {
-        this.getProfiles();
         this.getFields();
+        this.getProfiles();
     },
     watch: {
         selectedFields: {
@@ -46,22 +49,21 @@ export default {
         },
 
         updateUrlParams() {
-    const queryParams = {};
-    if (this.selectedFields.length > 0) {
-      queryParams.id = this.selectedFields.join(',');
-    }
-    if (this.selectNumbReviews > 0) {
-      queryParams.selectNumbReviews = this.selectNumbReviews;
-    }
-    if (this.average_vote > 0) {
-      queryParams.average_vote = this.average_vote;
-    }
+            const queryParams = {};
+            if (this.selectedFields.length > 0) {
+            queryParams.id = this.selectedFields.join(',');
+            }
+            if (this.selectNumbReviews > 0) {
+            queryParams.selectNumbReviews = this.selectNumbReviews;
+            }
+            if (this.average_vote > 0) {
+            queryParams.average_vote = this.average_vote;
+            }
 
-    this.$router.replace({ query: queryParams });
-  },
+            this.$router.replace({ query: queryParams });
+        },
 
         getProfiles() {
-
             const params = {
                 total_reviews: this.selectNumbReviews,
             }
@@ -75,9 +77,13 @@ export default {
             }
 
             axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
+                console.log(res.data);
                 this.profiles = res.data.profilesData;
-                this.updateUrlParams();
+                this.profilesTotal = res.data.profilesTotal;
+                this.profilesFiltered = res.data.profilesFiltered;
 
+                // this.updateUrlParams();
+                // ?id=1&id=2
             })
         },
 
@@ -92,54 +98,72 @@ export default {
 </script>
 
 <template>
-    <h1 class="text-center text-success">Sono la pagina Developers</h1>
-    <div class="container">
-        <h4>Filtro specializzazione</h4>
-    </div>
-    <div v-for="(elem, index) in this.fields" :key="index" class="container">
-        <div class="form-check">
-            <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
-                v-model="selectedFields">
-            <label class="form-check-label" :for="`field-${elem.id}`">
-                {{ elem.name }}
-            </label>
+    <h1 class="text-center text-success">Cerca il tuo Sviluppatore</h1>
+
+    <div class="text-end pe-5">Trovalo tra i nostri {{ this.profilesTotal }} talenti!</div>
+    <!-- sezione filtri -->
+    <div class="container border my-4">
+
+        <!-- fields -->
+        <div>
+            <div>Filtro specializzazione</div>
+        
+            <div v-for="(elem, index) in this.fields" :key="index" class="container">
+                <div class="form-check">
+                    <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
+                        v-model="selectedFields">
+                    <label class="form-check-label" :for="`field-${elem.id}`">
+                        {{ elem.name }}
+                    </label>
+                </div>
+            </div>
         </div>
+
+        <!-- filtro Numero recensioni -->
+        <div>
+            <label for="n-reviews">Filtro per numero di recensioni</label><br />
+            <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20"
+                v-model.number="selectNumbReviews" />
+
+            <datalist id="n-options">
+                <option value="0" label="0+"></option>
+                <option value="5" label="5+"></option>
+                <option value="10" label="10+"></option>
+                <option value="15" label="15+"></option>
+                <option value="20" label="20+"></option>
+            </datalist>
+        </div>
+        <!-- filtro Voti recensioni -->
+        <div>
+            <label for="avg-reviews">Filtro per voto medio</label><br />
+            <input type="range" id="avg-reviews" name="avg-reviews" list="avg-options" step="1" min="0" max="5"
+                v-model.number="average_vote" />
+
+            <datalist id="avg-options">
+                <option value="0" label="0"></option>
+                <option value="1" label="1"></option>
+                <option value="2" label="2"></option>
+                <option value="3" label="3"></option>
+                <option value="4" label="4"></option>
+                <option value="5" label="5"></option>
+            </datalist>
+        </div>
+
     </div>
-    <!-- filtro Numero recensioni -->
+    
+
+    <!-- Index profili -->
     <div class="container">
-        <label for="n-reviews">Filtro per numero di recensioni</label><br />
-        <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20"
-            v-model.number="selectNumbReviews" />
 
-        <datalist id="n-options">
-            <option value="0" label="0+"></option>
-            <option value="5" label="5+"></option>
-            <option value="10" label="10+"></option>
-            <option value="15" label="15+"></option>
-            <option value="20" label="20+"></option>
-        </datalist>
-    </div>
-    <!-- filtro Voti recensioni -->
-    <div class="container">
-        <label for="avg-reviews">Filtro per voto medio</label><br />
-        <input type="range" id="avg-reviews" name="avg-reviews" list="avg-options" step="1" min="0" max="5"
-            v-model.number="average_vote" />
+        <div v-if="this.profiles.length === 0" class="text-center"> <!-- SE non ci sono risultati -->
+            <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
+        </div>
 
-        <datalist id="avg-options">
-            <option value="0" label="0"></option>
-            <option value="1" label="1"></option>
-            <option value="2" label="2"></option>
-            <option value="3" label="3"></option>
-            <option value="4" label="4"></option>
-            <option value="5" label="5"></option>
-        </datalist>
-    </div>
+        <!-- statistiche -->
+        <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0">
+            La tua ricerca ha portato {{ this.profilesFiltered }} risultati
+        </div>
 
-    <div v-if="this.profiles.length === 0" class="text-center">
-        <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
-    </div>
-
-    <div class="container">
         <div class="row">
             <!-- Card -->
             <div v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
