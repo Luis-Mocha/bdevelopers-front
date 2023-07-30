@@ -17,12 +17,16 @@ export default {
             selectedFields: [],
             selectNumbReviews: 0,
             average_vote: 0,
+            
+            mobileView : false,
         }
     },
     created() {
         this.controlFields();
+        this.checkWidth()
     },
     mounted() {
+        window.addEventListener('resize', this.checkWidth);
         this.getFields();
         this.getProfiles();
     },
@@ -41,6 +45,26 @@ export default {
         },
     },
     methods: {
+        checkWidth() {
+
+            if (window.innerWidth < 700) {
+                this.mobileView = true
+            } else {
+                this.mobileView = false
+            }
+        },
+
+        toggleSidebar() {
+            let sidebar = document.getElementById('page-filters');
+
+            if (sidebar.classList.contains('mobile')) {
+                sidebar.classList.remove('mobile');
+            } else {
+                sidebar.classList.add('mobile');
+            }
+            
+        },
+
         // funzione per controllare se ci sono filtri preselezionati al caricamento della pagina
         controlFields() {
             const preselectedFields = this.$route.query.fields;
@@ -111,7 +135,7 @@ export default {
     <div class="container-flex">
 
         <!-- sezione filtri -->
-        <div class="page-filters sidebar">
+        <div id="page-filters" class="page-filters" :class=" this.mobileView == true ? 'mobile' : '' ">
 
             <!-- filtro fields -->
             <div>
@@ -152,6 +176,8 @@ export default {
                 </span>
             </div>
 
+            <button @click="toggleSidebar()" v-if="this.mobileView == true">X</button>
+
         </div>
 
         <!-- sezione pagina titolo/cards -->
@@ -169,6 +195,8 @@ export default {
                 </div>
             </div>
 
+            <button @click="toggleSidebar()" v-if="this.mobileView == true">Apri Filtri</button>
+
             <!-- Index profili -->
             <div class="cards-section w-100">
 
@@ -178,29 +206,25 @@ export default {
                 </div>
 
                 <div class="card-row">
-                    <!-- Card -->
-                    <div v-for="(element, index) in this.profiles" :key="index" class="d-flex">
+                    <!-- ProfileCard -->
+                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex flex-nowrap">
 
-                        <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
+                        <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }" :class="( index % 2 === 0) ? 'order-1' : 'order-2'">
+                            <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`" alt="Immagine Profilo" class="card-img" >
+                            <img v-else src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Immagine Profilo" class="card-img">
+                        </router-link>
 
-                        <div class="card-body">
+                        <div :class="( index % 2 === 0) ? 'order-2' : 'order-1'">
                             <div>{{ element.name }}</div>
                             <div>{{ element.surname }}</div>
                             <div>{{ element.birth_date }}</div>
-
-                            <div>Fields:</div>
-                            <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
-
-                            <div class="mt-2">Technologies:</div>
-                            <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
-
                             <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
+                            <div class="d-flex">
+                                <span class="me-2">Fields:</span>
+                                <span v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</span>
+                            </div>
+                        </div>                    
 
-                            <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }">
-                                <button>Come link metterei tuta la card</button>
-                            </router-link>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -212,11 +236,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-// font-family: 'Anton', sans-serif;
-// font-family: 'Handjet', cursive;
-// font-family: 'Josefin Sans', sans-serif;
-// font-family: 'Montserrat', sans-serif;
+//dark-blue #1d1b2c
+//gold #E7A117
 .container-flex {
+    position: relative;
     width: 100%;
     display: flex;
     font-family: 'Montserrat', sans-serif;
@@ -230,26 +253,63 @@ export default {
         width: 100%;
 
         .top-page {
+            // lo header è di 60px
             height: 130px;
             h1 {
                 margin: 0;
             }
         }
-
         .cards-section {
             width: 100%;
-            // lo header è di 60px
             height: calc(100vh - 190px);
             overflow: auto;
 
-            .card-img-top {
-                width: 150px;
-                height: 150px;
-                object-fit: cover;
-                border: 1px solid red;
+            .profile-card {
+                border: 2px solid #1d1b2c;
+                margin: auto;
+                margin-bottom: 20px;
+                width: 80%;
+                height: 200px;
+
+                .card-img {
+                    cursor: pointer;
+                    margin: 0;
+                    display: block;
+                    box-sizing: border-box;
+                    width: 200px;
+                    height: 200px;
+                    object-fit: cover;
+                }
+                .float-left {
+                    float: left;
+                }
+                .float-right {
+                    float: right;
+                }
             }
+
         }
     }
+}
+
+
+.page-filters.mobile {
+    background-color: antiquewhite;
+    display: none;
+    transition: 2s;
+}
+
+@media screen and (max-width: 700px) {
+    .page-filters {
+    position: absolute;
+    top: 0;
+    left:0;
+    right: 0;
+    // width: 100vw;
+    height: 100%;
+    z-index: 999;
+    background-color: white;
+}
 }
 
     datalist {
