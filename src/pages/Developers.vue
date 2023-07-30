@@ -107,20 +107,13 @@ export default {
 </script>
 
 <template>
-    <div class="intestazione">
-        <h1 class="text-center text-success">Cerca il tuo Sviluppatore</h1>
 
-        <div class="text-end pe-5">Trovalo tra i nostri {{ this.profilesTotal }} talenti!</div>
-    </div>
-    
+    <div class="container-flex">
 
-    <!-- contenitore filtri e cards -->
-    <div class="container-filter-cards">
-    
         <!-- sezione filtri -->
-        <div class="filter-section">
+        <div class="page-filters sidebar">
 
-            <!-- fields -->
+            <!-- filtro fields -->
             <div>
                 <div>Filtro specializzazione</div>
 
@@ -128,7 +121,7 @@ export default {
                     <div class="form-check">
                         <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
                             v-model="selectedFields">
-                        <label class="form-check-label" :for="`field-${elem.id}`">
+                        <label class="form-check-label text-capitalize" :for="`field-${elem.id}`">
                             {{ elem.name }}
                         </label>
                     </div>
@@ -160,80 +153,111 @@ export default {
             </div>
 
         </div>
-        
-        <!-- Index profili -->
-        <div class="cards-section">
 
-            <!-- SE non ci sono risultati -->
-            <div v-if="this.profiles.length === 0" class="text-center"> 
-                <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
+        <!-- sezione pagina titolo/cards -->
+        <div class="page-content">
+
+            <div class="top-page">
+                <h1 class="text-center text-success">Trova lo sviluppatore che cerchi!</h1>
+
+                <div class="text-end pe-5">Trovalo tra i nostri {{ this.profilesTotal }} talenti!</div>
+
+
+                <!-- numero risultati filtrati -->
+                <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0" class="text-center">
+                        La tua ricerca ha portato {{ this.profilesFiltered }} risultati
+                </div>
             </div>
 
-            <!-- numero risultati filtrati -->
-            <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0">
-                La tua ricerca ha portato {{ this.profilesFiltered }} risultati
-            </div>
+            <!-- Index profili -->
+            <div class="cards-section w-100">
 
-            <div class="row">
-                <!-- Card -->
-                <div v-for="(element, index) in this.profiles" :key="index" class="card my-2 col-12 col-md-6 col-lg-4">
-                    <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
+                <!-- SE non ci sono risultati -->
+                <div v-if="this.profiles.length === 0" class="text-center"> 
+                    <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
+                </div>
 
+                <div class="card-row">
+                    <!-- Card -->
+                    <div v-for="(element, index) in this.profiles" :key="index" class="d-flex">
 
-                    <div class="card-body">
-                        <div>{{ element.name }}</div>
-                        <div>{{ element.surname }}</div>
-                        <div>{{ element.birth_date }}</div>
+                        <img :src="`${baseUrlStorage}${element.profile_image}`" alt="" class="card-img-top">
 
-                        <div>Fields:</div>
-                        <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
+                        <div class="card-body">
+                            <div>{{ element.name }}</div>
+                            <div>{{ element.surname }}</div>
+                            <div>{{ element.birth_date }}</div>
 
-                        <div class="mt-2">Technologies:</div>
-                        <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
+                            <div>Fields:</div>
+                            <div v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</div>
 
-                        <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
+                            <div class="mt-2">Technologies:</div>
+                            <div v-for="(elem, index) in element.technology_names" :key="index">{{ elem }}</div>
 
-                        <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }">
-                            <button>Come link metterei tuta la card</button>
-                        </router-link>
+                            <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
 
+                            <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }">
+                                <button>Come link metterei tuta la card</button>
+                            </router-link>
+
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
+
 </template>
 
 <style lang="scss" scoped>
-    // lo header è di 60px
-    .intestazione {
-        height: 60px;
-        h1 {
-            margin: 0;
-        }
-    }
-    .container-filter-cards {
-        height: calc(100vh - 120px);
-        display: flex;
+// font-family: 'Anton', sans-serif;
+// font-family: 'Handjet', cursive;
+// font-family: 'Josefin Sans', sans-serif;
+// font-family: 'Montserrat', sans-serif;
+.container-flex {
+    width: 100%;
+    display: flex;
+    font-family: 'Montserrat', sans-serif;
 
-        .filter-section {
-            min-width: 350px;
-            border-right: 2px solid green;
+    .page-filters {
+        min-width: 320px;
+        border-right: 2px solid green;
+    }
+
+    .page-content {
+        width: 100%;
+
+        .top-page {
+            height: 130px;
+            h1 {
+                margin: 0;
+            }
         }
 
         .cards-section {
+            width: 100%;
+            // lo header è di 60px
+            height: calc(100vh - 190px);
             overflow: auto;
+
+            .card-img-top {
+                width: 150px;
+                height: 150px;
+                object-fit: cover;
+                border: 1px solid red;
+            }
         }
     }
-
+}
 
     datalist {
         display: flex;
         // flex-direction: column;
         justify-content: space-between;
         // writing-mode: vertical-lr;
-        width: 200px;
+        width: 150px;
     }
 
     option {
@@ -241,7 +265,7 @@ export default {
     }
 
     input[type="range"] {
-        width: 200px;
+        width: 150px;
         margin: 0;
     }
 
