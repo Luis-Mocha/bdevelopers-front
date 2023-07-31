@@ -137,9 +137,13 @@ export default {
         },
 
         selezionaVotoMedio(parVote) {
-            console.log('helooooo');
             this.average_vote = parVote;
         },
+        deleteFilters() {
+            this.average_vote = null;
+            this.selectNumbReviews = null;
+            this.selectedFields = [];
+        }
     }
 }
 
@@ -199,6 +203,11 @@ export default {
                 </div>
                 
             </div>
+
+            <!-- cancella filtri -->
+            <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0" @click="deleteFilters()" id="deleteFilters" class="m-auto">
+                Elimina i filtri 
+            </div>
             
 
             <button id="closeSideBtn" @click="toggleSidebar()" v-if="this.mobileView == true">
@@ -233,13 +242,13 @@ export default {
             <div class="cards-section w-100">
 
                 <!-- SE non ci sono risultati -->
-                <div v-if="this.profiles.length === 0" class="text-center"> 
+                <div v-if="this.profiles.length === 0" class="text-center mt-5"> 
                     <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
                 </div>
 
                 <div class="card-row">
                     <!-- ProfileCard -->
-                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex flex-column flex-lg-row ">
+                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex flex-column flex-lg-row">
                         <!-- IMMAGINE CARD -->
                         <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }" :class="( index % 2 === 0) ? 'order-1' : 'order-2'">
                             <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`" alt="Immagine Profilo" class="card-img">
@@ -247,7 +256,7 @@ export default {
                         </router-link>
 
                         <!-- INFORMAZIONI CARD -->
-                        <div class="card-info p-2" :class="( index % 2 === 0) ? 'order-2' : 'order-1'">
+                        <div class="card-info" :class="( index % 2 === 0) ? 'order-2' : 'order-1'">
                             <!-- in evidenza -->
                             <div v-if="element.active_sponsorship" class="text-end">
                                 In Evidenza <i class="fa-solid fa-gem"></i>
@@ -262,8 +271,8 @@ export default {
                                 <span class="info-cognome ms-3">{{ element.surname }}</span>
                             </div>
                             <!-- fields -->
-                            <div>
-                                <div class="card-label">Campi di sviluppo:</div>
+                            <div class="mb-2">
+                                <div class="card-label mb-1">Campi di sviluppo:</div>
                                 <div class="d-flex flex-wrap">
                                     <span v-for="(elem, index) in element.field_names" :key="index" :class="getClass(normalizeFieldName(elem))" class=" info-field me-2 text-capitalize">{{ elem }}</span>
                                 </div>
@@ -314,6 +323,15 @@ export default {
             }
         }
 
+        #deleteFilters {
+            cursor: pointer;
+            font-weight: 600;
+            color: red;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
         #closeSideBtn {
             background: #1d1b2c;
             color:#E7A117;
@@ -355,7 +373,7 @@ export default {
                 border-radius: 20px 10px 20px 10px;
                 border: 2px solid #1d1b2c;
                 margin: auto;
-                margin-bottom: 20px;
+                margin-bottom: 25px;
                 width: 80%;
                 min-height: 250px;
 
@@ -367,6 +385,7 @@ export default {
                     width: 250px;
                     height: 250px;
                     object-fit: cover;
+                    border-radius: 10px;
                 }
                 @media screen and (max-width: 992px) {
                     .card-img {
@@ -378,7 +397,7 @@ export default {
 
 
                 .card-info {
-                    padding: 0 5px;
+                    padding: 5px 30px;
                     width: 100%;
                     display: flex;
                     flex-direction: column;
@@ -392,8 +411,8 @@ export default {
                     }
                     .info-nome,
                     .info-cognome {
-                        font-size: 20px;
-                        font-weight: 600;
+                        font-size: 25px;
+                        font-weight: 800;
                     }
                     .card-label {
                         font-family: 'Space Grotesk', sans-serif;
@@ -458,12 +477,19 @@ input[type="range"] {
 
 .info-field {
     color: white;
+    font-weight: 600;
     border-radius: 20px 8px 20px 8px;
-    padding: 0 4px;
+    padding: 2px 5px;
     margin-bottom: 2px;
 }
 .sviluppo-web {
-    background-color: yellow;
+    color: white;
+    // border: 1px solid black;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi-838ObC7aOQ2ox_5mcjA1QCTf7Ml5LT3LQ&usqp=CAU');
+    // background-color: gray;
+    // background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
 }
 .gaming {
     background-image: url("https://i0.wp.com/www.imaginestemacademy.com/wp-content/uploads/2022/09/pacman.jpg?resize=816%2C675&ssl=1");
@@ -471,22 +497,36 @@ input[type="range"] {
     // background-color: red;
 }
 .cyber-security {
-    background-color: #1d1b2c;
-    &::after {
-        content: 'X';
-    }
+    background-color: darkgreen;
+    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYLBLmx5P2Miw3HJLp3L5SiSM2L1a0HYhktw&usqp=CAU");
 }
 .app-mobile {
     background-color: #E7A117;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS887lSA-xfspq-v0SBqecMoQHqNexrm4MViQ&usqp=CAU');
+    background-size: cover;
+    background-position: center;
+    // filter: brightness(70%);
+    background-color: lightgrey;
+    background-blend-mode: multiply;
 }
 .blockchain {
     background-color: #19b347;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_zlUC5QcMuHWG97OqDMZa9m_ZPFWDOQkRA&usqp=CAU');
+    background-color: gray;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
 }
 .machine-learning {
     background-color: purple;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXvX0QKnyzhcifLPnH0rUo-6t_zNUFxfx8BA&usqp=CAU');
+    background-size: cover;
+    background-position: center;
+    background-color: lightgray;
+    background-blend-mode: multiply;
 }
 .CRM {
-    background-color: darkorchid;
+    background-color: black;
 }
 
 

@@ -155,7 +155,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Nome</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ singleProfile.name }}</p>
+                                    <p class="text-muted mb-0 text-capitalize">{{ singleProfile.name }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -164,7 +164,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Cognome</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ singleProfile.surname }}</p>
+                                    <p class="text-muted mb-0 text-capitalize">{{ singleProfile.surname }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -182,7 +182,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Indirizzo</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ singleProfile.address }}</p>
+                                    <p class="text-muted mb-0 text-capitalize">{{ singleProfile.address }}</p>
                                 </div>
                             </div>
                             <hr>
