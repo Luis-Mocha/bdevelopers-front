@@ -208,22 +208,28 @@ export default {
                 <div class="card-row">
                     <!-- ProfileCard -->
                     <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex ">
-
+                        <!-- IMMAGINE CARD -->
                         <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }" :class="( index % 2 === 0) ? 'order-1' : 'order-2'">
-                            <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`" alt="Immagine Profilo" class="card-img" >
+                            <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`" alt="Immagine Profilo" class="card-img">
                             <img v-else src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Immagine Profilo" class="card-img">
                         </router-link>
 
+                        <!-- INFORMAZIONI CARD -->
                         <div class="card-info p-2" :class="( index % 2 === 0) ? 'order-2' : 'order-1'">
+                            <!-- in evidenza -->
                             <div v-if="element.active_sponsorship" class="text-end">
                                 In Evidenza <i class="fa-solid fa-gem"></i>
                             </div>
-                            <div>{{ element.name }}</div>
-                            <div>{{ element.surname }}</div>
-                            <div>{{ element.birth_date }}</div>
-                            <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
+                            <!-- voto medio -->
+                            <div class="text-end" v-if="element.average_vote > 0">
+                                <i class="fa-solid fa-star"></i> <strong>{{ element.average_vote }}/5</strong>
+                            </div>
+
+                            <span class="info-nome">{{ element.name }}</span>
+                            <span class="info-cognome ms-3">{{ element.surname }}</span>
+                            
                             <div>
-                                <div>Fields:</div>
+                                <div>Campi di sviluppo:</div>
                                 <div class="d-flex flex-wrap">
                                     <span v-for="(elem, index) in element.field_names" :key="index" class="me-2 text-capitalize ">{{ elem }}</span>
                                 </div>
@@ -252,7 +258,7 @@ export default {
 
     .page-filters {
         min-width: 320px;
-        border-right: 2px solid green;
+        border-right: 2px solid #1d1b2c;
     }
 
     .page-content {
@@ -293,6 +299,14 @@ export default {
                     .fa-gem {
                         color: #19b347;
                         font-size: 19px;
+                    }
+                    .fa-star {
+                        color: #E7A117;
+                    }
+                    .info-nome,
+                    .info-cognome {
+                        font-size: 19px;
+                        font-weight: 600;
                     }
                 }
                 
