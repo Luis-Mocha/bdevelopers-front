@@ -103,34 +103,195 @@ export default {
 </script>
 
 <template>
-    <h1 class="text-center text-success">Show Developer</h1>
+    <section id="single-developer">
+        <h1 class="text-center text-success">Show Developer</h1>
 
-    <div class="container">
-        <img :src="`${baseUrlStorage}${singleProfile.profile_image}`" alt="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card m-auto text-center mb-4 rounded-4" data-aos="slide-right" data-aos-duration="1500">
+                        <img class=" w-50 m-auto mb-3 mt-4 profile-img"
+                            :src="`${baseUrlStorage}${singleProfile.profile_image}`" alt="">
+                        <div class="d-flex justify-content-center mb-3">
+                            <h2> {{ singleProfile.name }} </h2>
+                            <h2 class="ms-3"> {{ singleProfile.surname }} </h2>
+                        </div>
+                        <div class="flex-wrap mb-2">
+                            <span v-for="(elem, index) in singleProfile.field_names" :key="index"
+                                class="me-2 text-capitalize ">{{ elem }}</span>
+                        </div>
 
-        <div> {{ singleProfile.name }} </div>
-        <div> {{ singleProfile.surname }} </div>
-        <div> {{ singleProfile.birth_date }} </div>
-        <div> {{ singleProfile.address }} </div>
-        <div> {{ singleProfile.email }} </div>
-        <div> {{ singleProfile.github_url }} </div>
-        <div> {{ singleProfile.linkedin_url }} </div>
-        <div> {{ singleProfile.performance }} </div>
-        <a :href="`${baseUrlStorage}${singleProfile.curriculum}`" target="_blank" rel="noopener noreferrer">Scarica il
-            curriculum</a>
+                        <div class="mb-2"> {{ singleProfile.address }} </div>
 
-        <!-- Recensioni -->
-        <div>
-            <div>voto medio: {{ parseFloat(singleProfile.average_vote).toFixed(1) }}</div>
-            <!-- offcanvas recensioni -->
-            <button class="btn btn-primary me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                aria-controls="offcanvasRight">Scrivi un recensione</button>
-            <!-- MODALE -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                data-bs-whatever="@getbootstrap">Scrivi un messaggio</button>
+                        <div class="d-flex justify-content-center mb-4">
+                            <!-- offcanvas recensioni -->
+                            <button class=" btn button me-3" type="button" data-bs-toggle="offcanvas"
+                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Scrivi una
+                                recensione</button>
+                            <!-- MODALE -->
+                            <button type="button" class="btn button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                data-bs-whatever="@getbootstrap">Scrivi un messaggio</button>
+                        </div>
+                    </div>
+                    <div class="card mb-4  rounded-3" data-aos="slide-right" data-aos-duration="1500">
+                        <ul class="list-group list-group-flush rounded-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fa-brands fa-linkedin fa-lg text-primary"></i>
+                                <p class="mb-0">{{ singleProfile.linkedin_url }}</p>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                                <p class="mb-0">{{ singleProfile.github_url }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
+                <div class="col-lg-8">
+                    <div class="card mb-4 rounded-4" data-aos="slide-left" data-aos-duration="1500">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Nome</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ singleProfile.name }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Cognome</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ singleProfile.surname }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Email</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ singleProfile.email }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Indirizzo</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ singleProfile.address }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Data di nascita</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ singleProfile.birth_date }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Numero di telefono</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{ singleProfile.phone_number }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Tecnologie di sviluppo</p>
+                                </div>
+                                <div class="col-sm-9 d-flex">
+                                    <div v-for="(elem, index) in singleProfile.technology_names">
+                                        <span :key="index" class="text-muted mb-0">{{ elem }}</span>
+                                        <span v-if="index !== singleProfile.technology_names.length - 1"
+                                            class="me-2">,</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0 text-uppercase fw-semibold">Curriculum</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <a class="text-muted mb-0" :href="`${baseUrlStorage}${singleProfile.curriculum}`"
+                                        target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Recensioni -->
+                            <div class="card mb-4 card-recensioni" data-aos="slide-left" data-aos-duration="1500">
+                                <div class="p-3">
 
+                                    <div class="card-title">
+                                        <h2 class="mb-0">RECENSIONI</h2>
+                                        <div class="mb-3">voto medio:
+                                            {{ parseFloat(singleProfile.average_vote).toFixed(1) }}
+                                        </div>
+                                    </div>
+                                    <div v-if="singleProfile.reviews == null">
+                                        Non ci sono recensioni
+                                    </div>
 
+                                    <div v-for="(elem, index) in singleProfile.reviews" :key="index"
+                                        class="border mb-4 p-3 rounded-4">
+                                        <div class="row">
+                                            <div class="col-sm-3 d-flex mb-3">
+                                                <h3 class="mb-2 text-uppercase fw-semibold fs-5">{{ elem.name }}</h3>
+                                                <h3 class="mb-2 ms-1 text-uppercase fw-semibold fs-5">{{ elem.surname }}
+                                                </h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-2 text-uppercase fw-medium">Data</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-2">{{ elem.date.split('-').reverse().join('/') }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-2 text-uppercase fw-medium">Voto: {{ elem.vote }}</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <span v-for="i in 5" :key="i">
+                                                    <i :class="i <= elem.vote ? 'fa-solid' : 'fa-regular'"
+                                                        class="fa-star text-warning"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-2 text-uppercase fw-medium">Descrizione</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <i class="fa-solid fa-quote-left"></i>
+                                                {{ elem.description }}
+                                                <i class="fa-solid fa-quote-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OFFCANVAS -->
             <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasRight"
                 aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
@@ -209,45 +370,35 @@ export default {
                     </div>
                 </div>
             </div>
-
-            <h2 class="mt-4 mb-2">RECENSIONI</h2>
-            <div v-if="singleProfile.reviews == null">
-                Non ci sono recensioni
-            </div>
-
-            <div v-for="(elem, index) in singleProfile.reviews" :key="index" class="border mb-2">
-                <!-- nome e cognome -->
-                <div>
-                    <span class="me-1">{{ elem.name }}</span>
-                    <span>{{ elem.surname }}</span>
-                </div>
-
-                <!-- data -->
-                <div>
-                    <span>Data:</span>
-                    <div>{{ elem.date.split('-').reverse().join('/') }}</div>
-                </div>
-
-                <!-- voto -->
-                <div>Voto: {{ elem.vote }}</div>
-                <span v-for="i in 5" :key="i">
-                    <i :class="i <= elem.vote ? 'fa-solid' : 'fa-regular'" class="fa-star text-warning"></i>
-                </span>
-                <!-- descrizione -->
-                <div>
-                    <i class="fa-solid fa-quote-left"></i>
-                    {{ elem.description }}
-                    <i class="fa-solid fa-quote-right"></i>
-                </div>
-            </div>
         </div>
-
-
-    </div>
+    </section>
 </template>
 
 <style lang="scss" scoped>
-// .fa-star {
-//     color: rgba(206, 154, 12, 0.815);
-// }
+#single-developer {
+    .profile-img {
+        border-radius: 20px 10px 20px 10px;
+        max-width: 70%;
+        max-height: 70%;
+        object-fit: cover;
+        box-shadow: 15px 15px 7px -5px rgba(0, 0, 0, 0.75);
+    }
+
+    .card {
+        border: 1px solid #1d1b2c;
+    }
+
+    .button {
+        border: 2px solid #1d1b2c;
+        background-color: #E7A117;
+        border-radius: 10px;
+        transition: 1s;
+    }
+
+    .button:hover,
+    .button:focus {
+        box-shadow: 0 0.5em 0.5em -0.4em #1d1b2c;
+        transform: translateY(-0.25em);
+    }
+}
 </style>
