@@ -41,7 +41,8 @@ export default {
             })
         },
         goSelectedFields() {
-            this.$router.push({ path: '/developers', query: { id: this.selectedFields } })
+            let paramsFields = this.selectedFields.join(',');
+            this.$router.push({name: 'developers', query: { fields: paramsFields } })
         }
     },
 }

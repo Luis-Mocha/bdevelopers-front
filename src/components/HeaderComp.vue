@@ -53,6 +53,10 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+header {
+    height: 60px;
+    background-color: red;
+}
 .router-link-active {
     color: rgb(27, 216, 27);
 }
