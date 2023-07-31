@@ -139,9 +139,9 @@ export default {
 
             <!-- filtro fields -->
             <div class="filter-div">
-                <div class="filter-label">Filtra specializzazione</div>
+                <div class="filter-label">Filtra per specializzazione</div>
 
-                <div v-for="(elem, index) in this.fields" :key="index" class="container">
+                <div v-for="(elem, index) in this.fields" :key="index" class="ms-5">
                     <div class="form-check">
                         <input class="form-check-input" :name="elem.id" type="checkbox" :value="elem.id" :id="`field-${elem.id}`"
                             v-model="selectedFields">
@@ -158,29 +158,37 @@ export default {
                     <span class="filter-label">Filtra per voto medio</span>
                     
                 </div>
-                <span v-for="voto in 5" :key="key">
+                <div class="ms-5">
+                    <span v-for="voto in 5" :key="key">
                         <i :class="voto <= this.average_vote ? 'fa-solid' : 'fa-regular'" class="fa-star text-warning me-2" @click="selezionaVotoMedio(voto)"></i>
-                </span>
-                <span v-if="this.average_vote > 0" @click="selezionaVotoMedio(null)" class="text-secondary ms-3 fst-italic">cancella</span>
+                    </span>
+                    <span v-if="this.average_vote > 0" @click="selezionaVotoMedio(null)" class="text-secondary ms-3 fst-italic">cancella</span>
+                </div>
+               
             </div>
 
             <!-- filtro Numero recensioni -->
             <div class="filter-div">
-                <label for="n-reviews" class="filter-label">Filtra per il numero di recensioni</label>
-                <br/>
-                <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews" class="m-auto"/>
+                <div for="n-reviews" class="filter-label">Filtra per il numero di recensioni</div>
+                
+                <div class="ms-5">
+                    <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews" class="align-self-center"/>
 
-                <datalist id="n-options">
-                    <option value="0" label="0+"></option>
-                    <option value="5" label="5+"></option>
-                    <option value="10" label="10+"></option>
-                    <option value="15" label="15+"></option>
-                    <option value="20" label="20+"></option>
-                </datalist>
+                    <datalist id="n-options">
+                        <option value="0" label="0+"></option>
+                        <option value="5" label="5+"></option>
+                        <option value="10" label="10+"></option>
+                        <option value="15" label="15+"></option>
+                        <option value="20" label="20+"></option>
+                    </datalist>
+                </div>
+                
             </div>
             
 
-            <button @click="toggleSidebar()" v-if="this.mobileView == true">X</button>
+            <button id="closeSideBtn" @click="toggleSidebar()" v-if="this.mobileView == true">
+                <i class="fa-solid fa-forward"></i>
+            </button>
 
         </div>
 
@@ -188,18 +196,23 @@ export default {
         <div class="page-content">
 
             <div class="top-page">
-                <h1 class="text-center text-success">Trova lo sviluppatore che cerchi!</h1>
+                <h1 class="text-center">Trova lo sviluppatore per te!</h1>
 
-                <div class="text-end pe-5">Trovalo tra i nostri {{ this.profilesTotal }} talenti!</div>
+                <div class="text-end pe-5">Cerca ciò di cui hai bisogno. La nostra vetrina propone <i>più di {{ this.profilesTotal - 1}}</i> professionisti!</div>
 
-
-                <!-- numero risultati filtrati -->
-                <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0" class="text-center">
-                        La tua ricerca ha portato {{ this.profilesFiltered }} risultati
+                <div class="d-flex justify-content-between align-items-center px-5">
+                    <!-- numero risultati filtrati -->
+                    <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0" class="text-center">
+                            La tua ricerca ha portato <strong>{{ this.profilesFiltered }}</strong> risultati
+                    </div>
+                    <button id="opensideBtn" @click="toggleSidebar()" v-if="this.mobileView == true">
+                        <i class="fa-solid fa-sliders"></i>
+                    </button>
                 </div>
+                
             </div>
 
-            <button @click="toggleSidebar()" v-if="this.mobileView == true">Apri Filtri</button>
+            
 
             <!-- Index profili -->
             <div class="cards-section w-100">
@@ -266,16 +279,23 @@ export default {
         border-right: 2px solid #1d1b2c;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 20px 5px;
+        // align-items: start;
+        padding: 20px 20px;
 
         .filter-div {
-            margin: 20px 0;
+            margin: 15px 0;
 
             .filter-label {
                 font-family: 'Space Grotesk', sans-serif;
                 font-weight: 600;
             }
+        }
+
+        #closeSideBtn {
+            background: #1d1b2c;
+            color:#E7A117;
+            width: 20%;
+            margin: auto;
         }
     }
 
@@ -284,15 +304,27 @@ export default {
         width: 100%;
 
         .top-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
             // lo header è di 60px
             height: 130px;
+            margin-top: 5px;
             h1 {
                 margin: 0;
+                font-weight: 600;
+                color: #1d1b2c;
+            }
+
+            #opensideBtn {
+               background-color: #1d1b2c;
+               color: #E7A117;
+               padding: 0px 13px;
             }
         }
         .cards-section {
             width: 100%;
-            height: calc(100vh - 190px);
+            height: calc(100vh - 195px);
             overflow: auto;
 
             .profile-card {
@@ -356,8 +388,9 @@ export default {
     right: 0;
     // width: 100vw;
     height: 100%;
-    z-index: 999;
+    z-index: 99;
     background-color: white;
+    transition: 3s;
 }
 }
 
