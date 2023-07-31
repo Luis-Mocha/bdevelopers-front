@@ -224,7 +224,7 @@ export default {
 
                 <div class="card-row">
                     <!-- ProfileCard -->
-                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex ">
+                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex flex-column flex-lg-row ">
                         <!-- IMMAGINE CARD -->
                         <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }" :class="( index % 2 === 0) ? 'order-1' : 'order-2'">
                             <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`" alt="Immagine Profilo" class="card-img">
@@ -241,16 +241,23 @@ export default {
                             <div class="text-end" v-if="element.average_vote > 0">
                                 <i class="fa-solid fa-star"></i> <strong>{{ element.average_vote }}/5</strong>
                             </div>
-
-                            <span class="info-nome">{{ element.name }}</span>
-                            <span class="info-cognome ms-3">{{ element.surname }}</span>
-                            
+                            <!-- nome cognome -->
                             <div>
-                                <div>Campi di sviluppo:</div>
+                                <span class="info-nome">{{ element.name }}</span>
+                                <span class="info-cognome ms-3">{{ element.surname }}</span>
+                            </div>
+                            <!-- fields -->
+                            <div>
+                                <div class="card-label">Campi di sviluppo:</div>
                                 <div class="d-flex flex-wrap">
                                     <span v-for="(elem, index) in element.field_names" :key="index" class="me-2 text-capitalize ">{{ elem }}</span>
                                 </div>
-                                
+                            </div>
+                            <!-- performance -->
+                            <div class="info-performance" v-if="element.performance">
+                                &ldquo;
+                                {{ element.performance }}
+                                &rdquo;
                             </div>
                         </div>                    
 
@@ -276,7 +283,8 @@ export default {
     // sidebar filtri
     .page-filters {
         min-width: 320px;
-        border-right: 2px solid #1d1b2c;
+        border-right: 4px groove #1d1b2c;
+        // border-style: ;
         display: flex;
         flex-direction: column;
         // align-items: start;
@@ -308,7 +316,7 @@ export default {
             flex-direction: column;
             justify-content: space-evenly;
             // lo header è di 60px
-            height: 130px;
+            height: 150px;
             margin-top: 5px;
             h1 {
                 margin: 0;
@@ -324,29 +332,42 @@ export default {
         }
         .cards-section {
             width: 100%;
-            height: calc(100vh - 195px);
+            height: calc(100vh - 215px);
             overflow: auto;
 
             .profile-card {
+                overflow: hidden;
+                border-radius: 20px 10px 20px 10px;
                 border: 2px solid #1d1b2c;
                 margin: auto;
                 margin-bottom: 20px;
                 width: 80%;
-                height: 200px;
+                min-height: 250px;
 
                 .card-img {
                     cursor: pointer;
                     margin: 0;
                     display: block;
                     box-sizing: border-box;
-                    width: 200px;
-                    height: 200px;
+                    width: 250px;
+                    height: 250px;
                     object-fit: cover;
                 }
+                @media screen and (max-width: 992px) {
+                    .card-img {
+                        width: 100%;
+                        // height: 100%;
+                        // aspect-ratio: 1;
+                    }
+                }
+
 
                 .card-info {
+                    padding: 0 5px;
                     width: 100%;
-
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
                     .fa-gem {
                         color: #19b347;
                         font-size: 19px;
@@ -356,8 +377,22 @@ export default {
                     }
                     .info-nome,
                     .info-cognome {
-                        font-size: 19px;
+                        font-size: 20px;
                         font-weight: 600;
+                    }
+                    .card-label {
+                        font-family: 'Space Grotesk', sans-serif;
+                        font-weight: 600;
+                        letter-spacing: 2px;
+                        text-transform: uppercase;
+
+                    }
+                    .info-performance {
+                        // overflow:hidden;
+                        // display:inline-block;
+                        // overflow: ellipsis;
+                        // white-space: nowrap;
+                        max-height: 70px;
                     }
                 }
                 
@@ -386,12 +421,11 @@ export default {
     top: 0;
     left:0;
     right: 0;
-    // width: 100vw;
     height: 100%;
     z-index: 99;
     background-color: white;
     transition: 3s;
-}
+    }
 }
 
 // input range
