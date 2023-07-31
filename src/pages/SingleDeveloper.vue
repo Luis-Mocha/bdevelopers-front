@@ -390,6 +390,7 @@ export default {
 
     .button {
         border: 2px solid #1d1b2c;
+        color: #1d1b2c;
         background-color: #E7A117;
         border-radius: 10px;
         transition: 1s;
