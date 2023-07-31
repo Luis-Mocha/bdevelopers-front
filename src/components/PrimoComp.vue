@@ -9,7 +9,7 @@ export default {
 
 <template>
    <div id="section">
-    <h1>prova</h1>
+    <h1>Primo componente</h1>
    </div>
 </template>
 

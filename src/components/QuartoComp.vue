@@ -10,7 +10,7 @@ export default {
 
 <template>
    <div id="section">
-    <h1>secondo componente</h1>
+    <h1>Quarto componente</h1>
    </div>
 </template>
 

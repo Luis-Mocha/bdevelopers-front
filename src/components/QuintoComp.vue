@@ -10,13 +10,13 @@ export default {
 
 <template>
    <div id="section">
-    <h1>secondo componente</h1>
+    <h1>Quinto componente/Footer</h1>
    </div>
 </template>
 
 <style lang="scss" scoped>
     #section{
-        height: 100vh;
+        height: 50vh;
         background-color: green;
     }
 </style>
