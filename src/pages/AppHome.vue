@@ -141,7 +141,7 @@ export default {
             justify-content: center;
         }
         .filter-box.selected {
-            background-color: green;
+            background-color: rgb(53, 136, 53);
             &::after {
                 content: "\2713";
                 color: white;
