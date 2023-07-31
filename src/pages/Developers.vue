@@ -138,8 +138,8 @@ export default {
         <div id="page-filters" class="page-filters" :class=" this.mobileView == true ? 'mobile' : '' ">
 
             <!-- filtro fields -->
-            <div>
-                <div>Filtro specializzazione</div>
+            <div class="filter-div">
+                <div class="filter-label">Filtra specializzazione</div>
 
                 <div v-for="(elem, index) in this.fields" :key="index" class="container">
                     <div class="form-check">
@@ -152,10 +152,23 @@ export default {
                 </div>
             </div>
 
+            <!-- filtro Voti recensioni -->
+            <div class="filter-div">
+                <div>
+                    <span class="filter-label">Filtra per voto medio</span>
+                    
+                </div>
+                <span v-for="voto in 5" :key="key">
+                        <i :class="voto <= this.average_vote ? 'fa-solid' : 'fa-regular'" class="fa-star text-warning me-2" @click="selezionaVotoMedio(voto)"></i>
+                </span>
+                <span v-if="this.average_vote > 0" @click="selezionaVotoMedio(null)" class="text-secondary ms-3 fst-italic">cancella</span>
+            </div>
+
             <!-- filtro Numero recensioni -->
-            <div>
-                <label for="n-reviews">Filtro per numero di recensioni</label><br />
-                <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews" />
+            <div class="filter-div">
+                <label for="n-reviews" class="filter-label">Filtra per il numero di recensioni</label>
+                <br/>
+                <input type="range" id="n-reviews" name="n-reviews" list="n-options" step="5" min="0" max="20" v-model.number="selectNumbReviews" class="m-auto"/>
 
                 <datalist id="n-options">
                     <option value="0" label="0+"></option>
@@ -165,16 +178,7 @@ export default {
                     <option value="20" label="20+"></option>
                 </datalist>
             </div>
-            <!-- filtro Voti recensioni -->
-            <div>
-                <div>
-                    <span>Filtro per voto medio:</span>
-                    <span v-if="this.average_vote > 0" @click="selezionaVotoMedio(null)" class="text-secondary ms-3 fst-italic">cancella</span>
-                </div>
-                <span v-for="voto in 5" :key="key">
-                        <i :class="voto <= this.average_vote ? 'fa-solid' : 'fa-regular'" class="fa-star text-warning me-2" @click="selezionaVotoMedio(voto)"></i>
-                </span>
-            </div>
+            
 
             <button @click="toggleSidebar()" v-if="this.mobileView == true">X</button>
 
@@ -256,11 +260,26 @@ export default {
     display: flex;
     font-family: 'Montserrat', sans-serif;
 
+    // sidebar filtri
     .page-filters {
         min-width: 320px;
         border-right: 2px solid #1d1b2c;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 5px;
+
+        .filter-div {
+            margin: 20px 0;
+
+            .filter-label {
+                font-family: 'Space Grotesk', sans-serif;
+                font-weight: 600;
+            }
+        }
     }
 
+    // contenuto titolo/cards
     .page-content {
         width: 100%;
 
@@ -322,7 +341,7 @@ export default {
     }
 }
 
-
+// Sidebar MOBILE
 .page-filters.mobile {
     background-color: antiquewhite;
     display: none;
@@ -342,21 +361,22 @@ export default {
 }
 }
 
-    datalist {
-        display: flex;
-        // flex-direction: column;
-        justify-content: space-between;
-        // writing-mode: vertical-lr;
-        width: 150px;
-    }
+// input range
+datalist {
+    display: flex;
+    // flex-direction: column;
+    justify-content: space-between;
+    // writing-mode: vertical-lr;
+    width: 150px;
+}
 
-    option {
-        padding: 0;
-    }
+option {
+    padding: 0;
+}
 
-    input[type="range"] {
-        width: 150px;
-        margin: 0;
-    }
+input[type="range"] {
+    width: 150px;
+    margin: 0;
+}
 
 </style>
