@@ -103,13 +103,12 @@ export default {
 </script>
 
 <template>
-    <section id="single-developer">
-        <h1 class="text-center text-success">Show Developer</h1>
-
-        <div class="container">
+    <section id="single-developer" class="overflow-x-hidden">
+        <div class="container mt-5">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card m-auto text-center mb-4 rounded-4" data-aos="slide-right" data-aos-duration="1500">
+                    <div class="card m-auto text-center mb-4 rounded-4  border-0" data-aos="slide-right"
+                        data-aos-duration="1500">
                         <img class=" w-50 m-auto mb-3 mt-4 profile-img"
                             :src="`${baseUrlStorage}${singleProfile.profile_image}`" alt="">
                         <div class="d-flex justify-content-center mb-3">
@@ -118,22 +117,22 @@ export default {
                         </div>
                         <div class="flex-wrap mb-2">
                             <span v-for="(elem, index) in singleProfile.field_names" :key="index"
-                                class="me-2 text-capitalize ">{{ elem }}</span>
+                                class="me-2 text-capitalize">{{ elem }}</span>
                         </div>
 
-                        <div class="mb-2"> {{ singleProfile.address }} </div>
+                        <div class="mb-2 text-capitalize"> {{ singleProfile.address }} </div>
 
-                        <div class="d-flex justify-content-center mb-4">
+                        <div class="d-flex justify-content-center mb-4 border-0">
                             <!-- offcanvas recensioni -->
-                            <button class=" btn button me-3" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Scrivi una
+                            <button class="btn button me-3" type="button" data-bs-toggle="modal"
+                                data-bs-target="#reviewModal" data-bs-whatever="@getbootstrap">Scrivi una
                                 recensione</button>
                             <!-- MODALE -->
                             <button type="button" class="btn button" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 data-bs-whatever="@getbootstrap">Scrivi un messaggio</button>
                         </div>
                     </div>
-                    <div class="card mb-4  rounded-3" data-aos="slide-right" data-aos-duration="1500">
+                    <div class="card mb-4 border-0 rounded-3 " data-aos="slide-right" data-aos-duration="1500">
                         <ul class="list-group list-group-flush rounded-3">
                             <li class="list-group-item d-flex justify-content-between align-items-center p-3">
                                 <i class="fa-brands fa-linkedin fa-lg text-primary"></i>
@@ -148,7 +147,7 @@ export default {
                 </div>
 
                 <div class="col-lg-8">
-                    <div class="card mb-4 rounded-4" data-aos="slide-left" data-aos-duration="1500">
+                    <div class="card mb-4 rounded-4 border-custom" data-aos="slide-left" data-aos-duration="1500">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
@@ -222,8 +221,12 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Curriculum</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <a class="text-muted mb-0" :href="`${baseUrlStorage}${singleProfile.curriculum}`"
-                                        target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i></a>
+
+                                    <button class="btn-cv">
+                                        <a class="text-muted mb-0" :href="`${baseUrlStorage}${singleProfile.curriculum}`"
+                                            target="_blank" rel="noopener noreferrer"><i
+                                                class="fa-solid fa-file-pdf"></i><span class="ms-1">Scarica</span></a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -231,12 +234,13 @@ export default {
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Recensioni -->
-                            <div class="card mb-4 card-recensioni" data-aos="slide-left" data-aos-duration="1500">
+                            <div class="card mb-4 card-recensioni border-custom" data-aos="slide-left"
+                                data-aos-duration="1500">
                                 <div class="p-3">
 
                                     <div class="card-title">
                                         <h2 class="mb-0">RECENSIONI</h2>
-                                        <div class="mb-3">voto medio:
+                                        <div class="mb-3 text-capitalize">voto medio:
                                             {{ parseFloat(singleProfile.average_vote).toFixed(1) }}
                                         </div>
                                     </div>
@@ -245,7 +249,7 @@ export default {
                                     </div>
 
                                     <div v-for="(elem, index) in singleProfile.reviews" :key="index"
-                                        class="border mb-4 p-3 rounded-4">
+                                        class="border mb-4 p-3 rounded-4" data-aos="slide-left" data-aos-duration="1500">
                                         <div class="row">
                                             <div class="col-sm-3 d-flex mb-3">
                                                 <h3 class="mb-2 text-uppercase fw-semibold fs-5">{{ elem.name }}</h3>
@@ -290,47 +294,55 @@ export default {
                     </div>
                 </div>
             </div>
-
-            <!-- OFFCANVAS -->
-            <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasRight"
-                aria-labelledby="offcanvasRightLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasRightLabel">La tua recensione</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <form @submit.prevent="submitReview">
-                        <div>
-                            <label for="input-name">Nome</label>
-                            <input id="input-name" type="text" v-model="this.review.name" required>
+            <!-- MODALE RECENSIONI -->
+            <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Scrivi una recensione a
+                                {{ singleProfile.name }} {{ singleProfile.surname }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div>
-                            <label for="input-surname">Cognome</label>
-                            <input id="input-surname" type="text" v-model="this.review.surname" required>
+                        <div class="modal-body">
+                            <form @submit.prevent="submitReview">
+                                <div class="mb-3">
+                                    <label for="input-name" class="col-form-label">Nome</label>
+                                    <input id="input-name" class="form-control" type="text" v-model="this.review.name"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="input-surname" class="col-form-label">Cognome</label>
+                                    <input id="input-surname" class="form-control" type="text" v-model="this.review.surname"
+                                        required>
+                                </div>
+                                <div class="mb-3">
+                                    <input id="input-date" class="form-control" type="date" hidden disabled required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="select-vote" class="col-form-label">Voto</label>
+                                    <select name="vote" id="select-vote" class="form-select text-warning"
+                                        v-model="this.review.vote" required>
+                                        <option class="text-warning" value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
+                                        <option class="text-warning" value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
+                                        <option class="text-warning" value="3">&#9733;&#9733;&#9733;&#9734;&#9734;</option>
+                                        <option class="text-warning" value="2">&#9733;&#9733;&#9734;&#9734;&#9734;</option>
+                                        <option class="text-warning" value="1">&#9733;&#9734;&#9734;&#9734;&#9734;</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="input-desc">Recensione</label>
+                                    <textarea id="input-desc" class="form-control" rows="4" cols="50"
+                                        v-model="this.review.description" required></textarea>
+                                </div>
+                                <div class="modal-footer border-0">
+                                    <button type="submit" class="btn button mt-3 mb-2">Invia recensione</button>
+                                </div>
+                            </form>
                         </div>
-                        <div>
-                            <input id="input-date" type="date" hidden disabled required>
-                        </div>
-                        <div>
-                            <label for="select-vote">Voto</label>
-                            <select name="vote" id="select-vote" v-model="this.review.vote" required>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="input-desc">Recensione</label>
-                            <textarea id="input-desc" rows="4" cols="50" v-model="this.review.description"
-                                required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-3">Invia recensione</button>
-                    </form>
+                    </div>
                 </div>
             </div>
-            <!-- MODALE -->
+            <!-- MODALE MESSAGGIO -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -361,9 +373,9 @@ export default {
                                     <textarea class="form-control" id="recipient-message" required
                                         v-model="this.lead.message"></textarea>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                                    <button type="submit" class="btn btn-primary">Invia messaggio</button>
+                                <div class="modal-footer border-0">
+                                    <button type="button" class="btn button-close" data-bs-dismiss="modal">Chiudi</button>
+                                    <button type="submit" class="btn button">Invia messaggio</button>
                                 </div>
                             </form>
                         </div>
@@ -376,6 +388,9 @@ export default {
 
 <style lang="scss" scoped>
 #single-developer {
+
+    font-family: 'Space Grotesk', sans-serif;
+
     .profile-img {
         border-radius: 20px 10px 20px 10px;
         max-width: 70%;
@@ -386,6 +401,38 @@ export default {
 
     .card {
         border: 1px solid #1d1b2c;
+
+    }
+
+    .border-custom {
+        --b: .5em;
+        /* border width */
+        --c: 3em;
+        /* corner size */
+        --r: 2em;
+        /* corner rounding */
+        position: relative;
+        // margin: 1em auto;
+        border: solid var(--b) transparent;
+        // padding: 1em;
+        // max-width: 23em;
+        // font: 1.25em ubuntu, sans-serif;
+
+        &::before {
+            position: absolute;
+            z-index: -1;
+            inset: calc(-1*var(--b));
+            border: inherit;
+            border-radius: var(--r);
+            background: linear-gradient(#E7A117, rgb(255, 181, 20), #1d1b2c) border-box;
+            --corner:
+                conic-gradient(from -90deg at var(--c) var(--c), red 25%, #0000 0) 0 0/ calc(100% - var(--c)) calc(100% - var(--c)) border-box;
+            --inner: conic-gradient(red 0 0) padding-box;
+            -webkit-mask: var(--corner), var(--inner);
+            -webkit-mask-composite: source-out;
+            mask: var(--corner) subtract, var(--inner);
+            content: ''
+        }
     }
 
     .button {
@@ -399,6 +446,47 @@ export default {
     .button:hover,
     .button:focus {
         box-shadow: 0 0.5em 0.5em -0.4em #1d1b2c;
+        transform: translateY(-0.25em);
+    }
+
+    .button-close {
+        border: 2px solid #E7A117;
+        color: #E7A117;
+        background-color: #1d1b2c;
+        border-radius: 10px;
+        transition: 1s;
+    }
+
+    .button-close:hover,
+    .button-close:focus {
+        box-shadow: 0 0.5em 0.5em -0.4em #E7A117;
+        transform: translateY(-0.25em);
+    }
+
+    .btn-cv {
+        background-color: #1d1b2c;
+        border: 2px solid #E7A117;
+        padding: 5px 8px;
+        border-radius: 10px;
+        transition: 1s;
+
+        a {
+            text-decoration: none;
+
+            span {
+                color: white;
+            }
+
+            i {
+                color: white;
+            }
+        }
+
+    }
+
+    .btn-cv:hover,
+    .btn-cv:focus {
+        box-shadow: 0 0.5em 0.5em -0.4em #E7A117;
         transform: translateY(-0.25em);
     }
 }
