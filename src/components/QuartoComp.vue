@@ -15,7 +15,7 @@
         <div class="sec-container">
             <div class="div-jumbo">
                 <div class="sx">
-                    <div class="top">
+                    <div class="top" data-aos="slide-right" data-aos-duration="1500">
                         <ul>
                             <li><i class="fa-solid fa-universal-access"></i>
                                 <p> Sicuro & Intuitivo.</p>
@@ -32,9 +32,9 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="bot"></div>
+                    <div class="bot" data-aos="slide-up" data-aos-duration="1500"></div>
                 </div>
-                <div class="dx"></div>
+                <div class="dx" data-aos="slide-left" data-aos-duration="1500"></div>
             </div>
         </div>
 
@@ -170,10 +170,6 @@
 
 
 
-
-
-
-
         #section-4 .sec-container {
             display: flex;
             align-items: center;
@@ -196,7 +192,7 @@
 
 
     /* mobile */
-    @media all and (max-width:390px) {
+    @media all and (max-width:429px) {
 
         .title {
             display: none;
@@ -205,19 +201,17 @@
         .h2-mobile {
             display: block !important;
             font-size: 40px !important;
+            padding-top: 15px;
             text-align: center;
         }
 
         #section-4 .sec-container {
-
-
-
             .div-jumbo .sx {
 
 
-                .bot {
+                /* .bot {
                     display: none;
-                }
+                } */
 
                 .top {
                     height: 90%
