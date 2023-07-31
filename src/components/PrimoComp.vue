@@ -8,13 +8,13 @@ export default {
 
 
 <template>
-   <div id="section">
+   <div id="section-1">
     <h1>Primo componente</h1>
    </div>
 </template>
 
 <style lang="scss" scoped>
-    #section{
+    #section-1{
         height: 100vh;
         background-color: red;
     }
