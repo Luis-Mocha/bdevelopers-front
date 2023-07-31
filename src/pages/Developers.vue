@@ -460,15 +460,21 @@ input[type="range"] {
     color: white;
     border-radius: 20px 8px 20px 8px;
     padding: 0 4px;
+    margin-bottom: 2px;
 }
 .sviluppo-web {
     background-color: yellow;
 }
 .gaming {
-    background-color: red;
+    background-image: url("https://i0.wp.com/www.imaginestemacademy.com/wp-content/uploads/2022/09/pacman.jpg?resize=816%2C675&ssl=1");
+    background-size: cover;
+    // background-color: red;
 }
 .cyber-security {
     background-color: #1d1b2c;
+    &::after {
+        content: 'X';
+    }
 }
 .app-mobile {
     background-color: #E7A117;
