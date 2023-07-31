@@ -45,6 +45,21 @@ export default {
         },
     },
     methods: {
+        normalizeFieldName(fieldName) {
+            return fieldName.replace(/\s+/g, '_').toLowerCase();
+        },
+        getClass(param) {
+            const classMap = {
+                sviluppo_web: 'sviluppo-web',
+                gaming: 'gaming',
+                cyber_security: 'cyber-security',
+                app_mobile: 'app-mobile',
+                blockchain: 'blockchain',
+                machine_learning: 'machine-learning',
+                crm: 'CRM',
+            };
+            return classMap[param];
+        },
         checkWidth() {
 
             if (window.innerWidth < 700) {
@@ -250,7 +265,7 @@ export default {
                             <div>
                                 <div class="card-label">Campi di sviluppo:</div>
                                 <div class="d-flex flex-wrap">
-                                    <span v-for="(elem, index) in element.field_names" :key="index" class="me-2 text-capitalize ">{{ elem }}</span>
+                                    <span v-for="(elem, index) in element.field_names" :key="index" :class="getClass(normalizeFieldName(elem))" class=" info-field me-2 text-capitalize">{{ elem }}</span>
                                 </div>
                             </div>
                             <!-- performance -->
@@ -385,13 +400,8 @@ export default {
                         font-weight: 600;
                         letter-spacing: 2px;
                         text-transform: uppercase;
-
                     }
                     .info-performance {
-                        // overflow:hidden;
-                        // display:inline-block;
-                        // overflow: ellipsis;
-                        // white-space: nowrap;
                         max-height: 70px;
                     }
                 }
@@ -445,5 +455,33 @@ input[type="range"] {
     width: 150px;
     margin: 0;
 }
+
+.info-field {
+    color: white;
+    border-radius: 20px 8px 20px 8px;
+    padding: 0 4px;
+}
+.sviluppo-web {
+    background-color: yellow;
+}
+.gaming {
+    background-color: red;
+}
+.cyber-security {
+    background-color: #1d1b2c;
+}
+.app-mobile {
+    background-color: #E7A117;
+}
+.blockchain {
+    background-color: #19b347;
+}
+.machine-learning {
+    background-color: purple;
+}
+.CRM {
+    background-color: darkorchid;
+}
+
 
 </style>
