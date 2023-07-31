@@ -137,9 +137,13 @@ export default {
         },
 
         selezionaVotoMedio(parVote) {
-            console.log('helooooo');
             this.average_vote = parVote;
         },
+        deleteFilters() {
+            this.average_vote = null;
+            this.selectNumbReviews = null;
+            this.selectedFields = [];
+        }
     }
 }
 
@@ -199,6 +203,11 @@ export default {
                 </div>
                 
             </div>
+
+            <!-- cancella filtri -->
+            <div v-if="this.average_vote > 0 || this.selectedFields.length > 0 || this.selectNumbReviews > 0" @click="deleteFilters()" id="deleteFilters" class="m-auto">
+                Elimina i filtri 
+            </div>
             
 
             <button id="closeSideBtn" @click="toggleSidebar()" v-if="this.mobileView == true">
@@ -233,7 +242,7 @@ export default {
             <div class="cards-section w-100">
 
                 <!-- SE non ci sono risultati -->
-                <div v-if="this.profiles.length === 0" class="text-center"> 
+                <div v-if="this.profiles.length === 0" class="text-center mt-5"> 
                     <h2>Non ci sono profili che corrispondo alla tua ricerca</h2>
                 </div>
 
@@ -312,6 +321,12 @@ export default {
                 font-family: 'Space Grotesk', sans-serif;
                 font-weight: 600;
             }
+        }
+
+        #deleteFilters {
+            cursor: pointer;
+            font-weight: 600;
+            color: red;
         }
 
         #closeSideBtn {
