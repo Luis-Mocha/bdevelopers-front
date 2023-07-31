@@ -207,21 +207,27 @@ export default {
 
                 <div class="card-row">
                     <!-- ProfileCard -->
-                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex flex-nowrap">
+                    <div v-for="(element, index) in this.profiles" :key="index" class="profile-card d-flex ">
 
                         <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }" :class="( index % 2 === 0) ? 'order-1' : 'order-2'">
                             <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`" alt="Immagine Profilo" class="card-img" >
                             <img v-else src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png" alt="Immagine Profilo" class="card-img">
                         </router-link>
 
-                        <div :class="( index % 2 === 0) ? 'order-2' : 'order-1'">
+                        <div class="card-info p-2" :class="( index % 2 === 0) ? 'order-2' : 'order-1'">
+                            <div v-if="element.active_sponsorship" class="text-end">
+                                In Evidenza <i class="fa-solid fa-gem"></i>
+                            </div>
                             <div>{{ element.name }}</div>
                             <div>{{ element.surname }}</div>
                             <div>{{ element.birth_date }}</div>
                             <div v-if="element.average_vote > 0">Voto medio: {{ element.average_vote }}</div>
-                            <div class="d-flex">
-                                <span class="me-2">Fields:</span>
-                                <span v-for="(elem, index) in element.field_names" :key="index" class="text-capitalize">{{ elem }}</span>
+                            <div>
+                                <div>Fields:</div>
+                                <div class="d-flex flex-wrap">
+                                    <span v-for="(elem, index) in element.field_names" :key="index" class="me-2 text-capitalize ">{{ elem }}</span>
+                                </div>
+                                
                             </div>
                         </div>                    
 
@@ -280,6 +286,16 @@ export default {
                     height: 200px;
                     object-fit: cover;
                 }
+
+                .card-info {
+                    width: 100%;
+
+                    .fa-gem {
+                        color: #19b347;
+                        font-size: 19px;
+                    }
+                }
+                
                 .float-left {
                     float: left;
                 }
