@@ -15,7 +15,7 @@ export default {
         <div class="row h-100 gx-5">
             <div class="h-100 d-flex flex-column justify-content-center col-12 col-md-8">
                 <h2>È così che le buone compagnie <br>trovano buona compagnia</h2>
-                <h3 class="my-5">Entra in contatto coi migliori sviluppatori grazie a <span style="color: #E7A117;">My_Developer</span></h3>
+                <h3 class="my-5">Entra in contatto coi migliori sviluppatori grazie a <span style="color: #E7A117;">&lt;My_developer/&gt;</span></h3>
                 <p>Accedi ai migliori talenti nel campo della programmazione e <br> ad una nuova strada per la realizzazione dei tuoi progetti.</p>
             </div>
     
