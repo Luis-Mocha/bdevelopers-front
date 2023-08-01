@@ -199,9 +199,10 @@
     /* tablet */
     @media all and (max-width:835px) {
 
-        .dx {
+        /* .dx .dx-top {
             display: none !important;
-        }
+        } */
+
 
 
 
@@ -209,18 +210,51 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 92%;
+            height: 100%;
 
-            .div-jumbo .sx {
-                /* background-color: turquoise; */
-                width: 100%;
-                height: 85%;
-                align-items: flex-start;
+            position: relative;
 
-                .top {
-                    height: 60%;
-                    margin-bottom: 20px;
+            .div-jumbo {
+                display: flex;
+                flex-wrap: wrap;
+
+                .sx {
+                    /* background-color: turquoise; */
+                    width: 100%;
+                    height: 100%;
+                    align-items: flex-start;
+
+                    .top {
+                        height: 300px;
+                        margin-bottom: 40px;
+                        margin-top: 40px;
+
+                    }
+
+                    .bot {
+                        /* margin-bottom: 40px;
+                        height: 50%;
+                        width: 100%; */
+                        display: none;
+                    }
                 }
+
+                .dx {
+                    width: 80%;
+                    height: 600px;
+                    position: absolute;
+                    top: 370px;
+                    left: 10%;
+
+
+                    .dx-top {
+                        height: 400px;
+                        margin-bottom: 20px;
+                    }
+
+                }
+
+
             }
         }
     }
@@ -241,17 +275,24 @@
         }
 
         #section-4 .sec-container {
-            .div-jumbo .sx {
+            .div-jumbo {
+                .sx {
 
+                    .top {
+                        height: 50%
+                    }
+                }
 
-                /* .bot {
+                .dx .dx-top {
                     display: none;
-                } */
+                }
 
-                .top {
-                    height: 90%
+                .dx .dx-bot {
+                    margin-top: 60px;
+                    height: 200px;
                 }
             }
+
         }
 
     }
