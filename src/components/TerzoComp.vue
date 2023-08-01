@@ -19,14 +19,14 @@ export default {
             </div>
             <div class="col-12 col-md-7 h-100 d-flex flex-column justify-content-center" data-aos="fade-left"
                 data-aos-duration="2000">
-                <h2>Perchè chi fa affari <br>si rivolge a 
+                <h2>Perchè chi fa affari <br>si rivolge a
                 <span style="color: #F6EEE0;">&lt;My_developer/&gt;</span></h2>
                 <h3 class="my-2"><i class="fa-solid fa-star"></i>Qualità provata</h3>
-                <p>Controlla i campioni di lavoro di qualsiasi professionista, i feedback dei clienti e la verifica dell'identità.</p>
+                <p class="fs-5">Controlla i campioni di lavoro di qualsiasi professionista, i feedback dei clienti e la verifica dell'identità.</p>
                 <h3 class="my-2"><i class="fa-solid fa-dollar-sign"></i>Nessun costo fino all'assunzione</h3>
-                <p>Intervista i tuoi potenziali collaboratori, negozia le tariffe e paga solo per il lavoro che approvi.</p>
+                <p class="fs-5">Intervista i tuoi potenziali collaboratori, negozia le tariffe e paga solo per il lavoro che approvi.</p>
                 <h3 class="my-2"><i class="fa-solid fa-check"></i>Sicurezza e protezione</h3>
-                <p>Concentrati sul tuo lavoro, sapendo che 
+                <p class="fs-5">Concentrati sul tuo lavoro, sapendo che
                 <span style="color: #F6EEE0;">&lt;My_developer/&gt;</span> ti aiutia a proteggere i tuoi dati e la tua privacy. Siamo qui per te, con un supporto 24 ore su 24.</p>
             </div>
 
@@ -48,7 +48,13 @@ export default {
     }
 
     h3 {
+        color: #86530A;
         line-height: 2.5rem;
+        padding-bottom: 1rem;
+    }
+
+    h3 i {
+        color: #F6EEE0;
     }
 
     p {
@@ -71,6 +77,6 @@ export default {
     @media screen and (min-width: 700px) {
         #section-3{
         height: 100vh;
-        } 
+        }
     }
 </style>

@@ -1,7 +1,7 @@
 <script>
 
 import axios from 'axios';
-import PrimoComp from '../components/primoComp.vue';
+import PrimoComp from '../components/PrimoComp.vue';
 import SecondoComp from '../components/SecondoComp.vue';
 import TerzoComp from '../components/TerzoComp.vue';
 import QuartoComp from '../components/QuartoComp.vue';
@@ -11,12 +11,12 @@ import QuintoComp from '../components/QuintoComp.vue';
 export default {
     name: 'AppHome',
     components: {
-    PrimoComp,
-    SecondoComp,
-    TerzoComp,
-    QuartoComp,
-    QuintoComp
-},
+        PrimoComp,
+        SecondoComp,
+        TerzoComp,
+        QuartoComp,
+        QuintoComp
+    },
     data() {
         return {
             profiles: [],
@@ -24,7 +24,7 @@ export default {
             baseUrlStorage: 'http://127.0.0.1:8000/storage/',
             fields: [],
             selectedFields: [],
-            angle : 0,
+            angle: 0,
         }
     },
     mounted() {
@@ -32,11 +32,11 @@ export default {
         this.getFields();
     },
     methods: {
-        
-        galleryspin(sign) { 
-        const spinner = document.getElementById("spinner");
-        if (!sign) { this.angle = this.angle + 45; } else { this.angle = this.angle - 45; };
-        spinner.setAttribute("style","-webkit-transform: rotateY("+ this.angle +"deg); -moz-transform: rotateY("+ this.angle +"deg); transform: rotateY("+ this.angle +"deg);");
+
+        galleryspin(sign) {
+            const spinner = document.getElementById("spinner");
+            if (!sign) { this.angle = this.angle + 45; } else { this.angle = this.angle - 45; };
+            spinner.setAttribute("style", "-webkit-transform: rotateY(" + this.angle + "deg); -moz-transform: rotateY(" + this.angle + "deg); transform: rotateY(" + this.angle + "deg);");
         },
 
         getProfiles() {
@@ -53,7 +53,7 @@ export default {
         },
         goSelectedFields() {
             let paramsFields = this.selectedFields.join(',');
-            this.$router.push({name: 'developers', query: { fields: paramsFields } })
+            this.$router.push({ name: 'developers', query: { fields: paramsFields } })
         },
         normalizeFieldName(fieldName) {
             return fieldName.replace(/\s+/g, '_').toLowerCase();
@@ -91,23 +91,26 @@ export default {
 </script>
 
 <template>
-    <PrimoComp/>
+    <PrimoComp />
 
-    <div id="section-filters" class="container my-5">
-    
-        <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
+    <div id="section-filters" class="py-5">
 
-        <div class="flex-filters d-flex flex-wrap" >
-            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="toggleFilter(elem.id)">
-                <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
-                <span>{{ elem.name }}</span>
-            </div>
-            <div class="filter-box search-btn mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="goSelectedFields()">
-                <i class="fa-solid fa-magnifying-glass fa-xl me-2" style="color: #ffffff;"></i>
-                <span>Cerca</span>
+        <div class="container">
+            <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
+
+            <div class="flex-filters d-flex flex-wrap">
+                <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`"
+                    class="filter-box mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="toggleFilter(elem.id)">
+                    <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
+                    <span>{{ elem.name }}</span>
+                </div>
+                <div class="filter-box search-btn mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="goSelectedFields()">
+                    <i class="fa-solid fa-magnifying-glass fa-xl me-2" style="color: #ffffff;"></i>
+                    <span>Cerca</span>
+                </div>
             </div>
         </div>
-
+        
     </div>
 
     <div id="section">
@@ -123,7 +126,7 @@ export default {
                                 <div class="label-imgCarousel">
                                     <span class="text-white"><em>{{ elem.name }}</em></span>
                                     <span class="text-white ms-1"> <em>{{ elem.surname }}</em></span>
-                                </div>    
+                                </div>
                             </router-link>
                         </figure>
                     </div>
@@ -159,6 +162,7 @@ export default {
 #section{
     height: 75vh;
     color: #F6EEE0;
+
     .fondatori {
         display: table;
         margin: 5% auto 0;
@@ -246,7 +250,7 @@ export default {
         height: 210px;
     }
 
-    .box-img{
+    .box-img {
         border-radius: 20px 10px 20px 10px;
     }
 
@@ -256,7 +260,7 @@ export default {
         position: relative;
     }
 
-    .label-imgCarousel{
+    .label-imgCarousel {
         position: absolute;
         bottom: 5px;
         left: 5px;
@@ -267,7 +271,7 @@ export default {
         border-radius: 20px 10px 20px 10px;
     }
 
-    #title-section-carousel{
+    #title-section-carousel {
         font-size: 60px;
         color: #E7A117;
         font-family: 'Anton', sans-serif;
@@ -288,37 +292,38 @@ export default {
         }
     }
 
-}    
+}
 
 //dark-blue #1d1b2c
 //gold #E7A117
-#section-filters{
-        h2 {
-            // color: #1d1b2c;
-            // margin-bottom: 30px;
-            font-size: 50px;
-            color: #E7A117;
-            font-family: 'Anton', sans-serif;
-            text-align: start;
-        }
-        
-        .filter-box {
-            cursor: pointer;
-            background-color:#302e42;
-            color: white;
-            // width: 200px;
-            height: 60px;
-            border: 1px solid #E7A117;
-            border-radius: 10px;
-            padding: 10px 15px;
-            text-transform: capitalize;
-            text-align: center;
-            font-weight: 600;
-            font-family: 'Space Grotesk', sans-serif;
+#section-filters {
+    background-color: #F6EEE0;
+    h2 {
+        // color: #1d1b2c;
+        // margin-bottom: 30px;
+        font-size: 50px;
+        color: #E7A117;
+        font-family: 'Anton', sans-serif;
+        text-align: start;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .filter-box {
+        cursor: pointer;
+        background-color: #302e42;
+        color: white;
+        // width: 200px;
+        height: 60px;
+        border: 1px solid #E7A117;
+        border-radius: 10px;
+        padding: 10px 15px;
+        text-transform: capitalize;
+        text-align: center;
+        font-weight: 600;
+        font-family: 'Space Grotesk', sans-serif;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
             &:hover {
                 background-color: #E7A117;
