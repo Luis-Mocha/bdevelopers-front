@@ -38,21 +38,21 @@ export default {
         getSingleProfile() {
 
             axios.get(`${this.baseUrlApi}profiles/${this.$route.params.dev_id}`)
-                .then((response) => {
-                    console.log(response.data.profile);
+            .then((response) => {
+                console.log(response.data.profile);
 
-                    this.singleProfile = response.data.profile;
+                this.singleProfile = response.data.profile;
 
 
-                } // sintassi try and catch
-                    , error => {
-                        if (error.response.status === 404) {
-                            // console.log(error.reponse.status);
-                            this.$router.push({ name: 'notFound' })
-                        } else {
-                            // qualunque altro errore
-                        }
-                    })
+            } // sintassi try and catch
+            , error => {
+                if (error.response.status === 404) {
+                    // console.log(error.reponse.status);
+                    this.$router.push({ name: 'notFound' })
+                } else {
+                    // qualunque altro errore
+                }
+            })
         },
 
         getDate() {
@@ -73,30 +73,46 @@ export default {
         submitReview() {
             // Effettua una chiamata API POST al backend Laravel
             axios.post(`${this.baseUrlApi}reviews/store`, this.review)
-                .then(response => {
-                    console.log('Recensione salvata con successo!');
-                    // Effettua eventuali azioni aggiuntive dopo aver salvato la recensione
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error('Errore durante il salvataggio della recensione:', error);
-                });
+            .then(response => {
+                console.log('Recensione salvata con successo!');
+                // Effettua eventuali azioni aggiuntive dopo aver salvato la recensione
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Errore durante il salvataggio della recensione:', error);
+            });
 
         },
 
         submitLead() {
             // Effettua una chiamata API POST al backend Laravel
             axios.post(`${this.baseUrlApi}leads/store`, this.lead)
-                .then(response => {
-                    console.log('Recensione salvata con successo!');
-                    // Effettua eventuali azioni aggiuntive dopo aver salvato la recensione
-                    window.location.reload();
-                })
-                .catch(error => {
-                    console.error('Errore durante il salvataggio della recensione:', error);
-                });
+            .then(response => {
+                console.log('Recensione salvata con successo!');
+                // Effettua eventuali azioni aggiuntive dopo aver salvato la recensione
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Errore durante il salvataggio della recensione:', error);
+            });
 
-        }
+        },
+        normalizeFieldName(fieldName) {
+            return fieldName.replace(/\s+/g, '_').toLowerCase();
+        },
+        getClass(param) {
+            const classMap = {
+                sviluppo_web: 'sviluppo-web',
+                gaming: 'gaming',
+                cyber_security: 'cyber-security',
+                app_mobile: 'app-mobile',
+                blockchain: 'blockchain',
+                machine_learning: 'machine-learning',
+                crm: 'CRM',
+            };
+            return classMap[param];
+        },
+
     },
 }
 
@@ -115,9 +131,10 @@ export default {
                             <h2> {{ singleProfile.name }} </h2>
                             <h2 class="ms-3"> {{ singleProfile.surname }} </h2>
                         </div>
-                        <div class="flex-wrap mb-2">
-                            <span v-for="(elem, index) in singleProfile.field_names" :key="index"
-                                class="me-2 text-capitalize">{{ elem }}</span>
+                        <div class="d-flex flex-wrap mb-2">
+                            <span v-for="(elem, index) in singleProfile.field_names" :key="index" :class="getClass(normalizeFieldName(elem))" class="info-field text-capitalize">
+                                {{ elem }}
+                            </span>
                         </div>
 
                         <div class="mb-2 text-capitalize"> {{ singleProfile.address }} </div>
@@ -210,8 +227,7 @@ export default {
                                 <div class="col-sm-9 d-flex">
                                     <div v-for="(elem, index) in singleProfile.technology_names">
                                         <span :key="index" class="text-muted mb-0">{{ elem }}</span>
-                                        <span v-if="index !== singleProfile.technology_names.length - 1"
-                                            class="me-2">,</span>
+                                        <span v-if="index !== singleProfile.technology_names.length - 1" class="me-2">,</span>
                                     </div>
                                 </div>
                             </div>
@@ -488,6 +504,63 @@ export default {
     .btn-cv:focus {
         box-shadow: 0 0.5em 0.5em -0.4em #E7A117;
         transform: translateY(-0.25em);
+    }
+
+
+    // badge fields
+    .info-field {
+        color: white;
+        font-weight: 600;
+        border-radius: 20px 8px 20px 8px;
+        padding: 2px 5px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+    .sviluppo-web {
+        color: white;
+        // border: 1px solid black;
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRi-838ObC7aOQ2ox_5mcjA1QCTf7Ml5LT3LQ&usqp=CAU');
+        // background-color: gray;
+        // background-blend-mode: multiply;
+        background-size: cover;
+        background-position: center;
+    }
+    .gaming {
+        background-image: url("https://i0.wp.com/www.imaginestemacademy.com/wp-content/uploads/2022/09/pacman.jpg?resize=816%2C675&ssl=1");
+        background-size: cover;
+        // background-color: red;
+    }
+    .cyber-security {
+        background-color: darkgreen;
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYLBLmx5P2Miw3HJLp3L5SiSM2L1a0HYhktw&usqp=CAU");
+    }
+    .app-mobile {
+        background-color: #E7A117;
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS887lSA-xfspq-v0SBqecMoQHqNexrm4MViQ&usqp=CAU');
+        background-size: cover;
+        background-position: center;
+        // filter: brightness(70%);
+        background-color: lightgrey;
+        background-blend-mode: multiply;
+    }
+    .blockchain {
+        background-color: #19b347;
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQd_zlUC5QcMuHWG97OqDMZa9m_ZPFWDOQkRA&usqp=CAU');
+        background-color: gray;
+        background-blend-mode: multiply;
+        background-size: cover;
+        background-position: center;
+    }
+    .machine-learning {
+        background-color: purple;
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXvX0QKnyzhcifLPnH0rUo-6t_zNUFxfx8BA&usqp=CAU');
+        background-size: cover;
+        background-position: center;
+        background-color: lightgray;
+        background-blend-mode: multiply;
+    }
+    .CRM {
+        background-color: black;
     }
 }
 </style>
