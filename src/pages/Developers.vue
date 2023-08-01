@@ -345,7 +345,7 @@ export default {
             .filter-label {
                 font-family: 'Space Grotesk', sans-serif;
                 font-weight: 600;
-
+                font-size: 19px;
 
             }
 
