@@ -83,7 +83,17 @@ export default {
             // aggiungo la classe selected ai filtri selezionati
             let box = document.getElementById(`filter-${param}`)
             box.classList.toggle('selected')
-        }
+        },
+        scrollHorizontal(e, elemHtml) {
+
+            const slider = document.getElementById(elemHtml)
+
+            if (e.deltaY > 0) {
+                slider.scrollLeft += 100
+            } else {
+                slider.scrollLeft -= 100
+            }
+        },
     },
 }
 
@@ -96,7 +106,7 @@ export default {
     <div id="section-filters" class="py-5">
 
         <div class="container">
-            <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
+            <h2 class="mt-3 mb-4">Seleziona i campi di sviluppo</h2>
 
             <div class="flex-filters d-flex flex-wrap">
                 <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`"
@@ -113,38 +123,26 @@ export default {
         
     </div>
 
-    <div id="section">
+    <div id="section-vetrina">
         <div class="container">
-            <h2 id="title-section-carousel">Qui troverai centinaia di sviluppatori</h2>
-           
-            <section class="section-carousell pb-5 d-md-block">
-                <div class="container-carousel">
-                    <div id="carousel">
-                        <figure class="box-img" v-for="(elem, index) in this.profiles">
-                            <router-link :to="{ name: 'singleDeveloper', params: { dev_id: elem.profile_id } }">
-                                <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="">
-                                <div class="label-imgCarousel">
-                                    <span class="text-white"><em>{{ elem.name }}</em></span>
-                                    <span class="text-white ms-1"> <em>{{ elem.surname }}</em></span>
-                                </div>
-                            </router-link>
-                        </figure>
+            <h2 id="title-section-carousel">
+                Scegli tra centinaia di sviluppatori
+            </h2>
+
+            <div id="slider-evidenza" @wheel.prevent="scrollHorizontal($event, 'slider-evidenza')" class="slider row flex-nowrap overflow-x-hidden"> 
+                <div v-for="(elem, index) in this.profiles" class="card-vetrina">
+                    <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="" >
+                    <div class="card-info">
+                        <span>{{ elem.name }}</span>
+                        <span class="ms-2">{{ elem.surname }}</span>
+                    </div>
+                    <div class="card-vote">
+                        {{ elem.average_vote }}<i class="fa-solid fa-star"></i>
                     </div>
                 </div>
-            </section>
-            <section class="d-md-none">
-                <!-- <div id="box-mobile-img" class=" overflow-x-scroll d-flex">
-                    <div class="box-img" v-for="(elem, index) in this.profiles" style="widht: 40%">
-                        <router-link :to="{ name: 'singleDeveloper', params: { dev_id: elem.profile_id } }">
-                            <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="">
-                            <div class="label-imgCarousel">
-                                <span class="text-white"><em>{{ elem.name }}</em></span>
-                                <span class="text-white ms-1"> <em>{{ elem.surname }}</em></span>
-                            </div>    
-                        </router-link>
-                    </div>
-                </div> -->
-            </section>
+            
+                
+            </div>
 
         </div>
 
@@ -159,117 +157,12 @@ export default {
 </template>
 
 <style lang="scss">
-#section{
-    height: 75vh;
-    color: #F6EEE0;
 
-    .fondatori {
-        display: table;
-        margin: 5% auto 0;
-        //text-transform: uppercase;
-        font-family: 'Anaheim', sans-serif;
-        font-size: 4em;
-        font-weight: 400;
-        text-shadow: 0 1px white, 0 2px black;
-    }
 
-    .container-carousel {
-        margin: 4% auto;
-        width: 210px;
-        height: 160px;
-        position: relative;
-        perspective: 1000px;
-    }
 
-    #carousel {
-        width: 50%;
-        height: 50%;
-        position: absolute;
-        transform-style: preserve-3d;
-        animation: rotation 20s infinite linear;
-    }
-
-    #carousel:hover {
-        animation-play-state: paused;
-    }
-
-    #carousel figure {
-        display: block;
-        position: absolute;        
-        width: 186px;
-        height: 116px;
-        left: -150px;
-        top: 10px;
-        background: #333333;
-        overflow: hidden;
-        border: solid 5px #fff;
-    }
-
-    #carousel figure:nth-child(1) {
-        transform: rotateY(0deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(2) {
-        transform: rotateY(40deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(3) {
-        transform: rotateY(80deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(4) {
-        transform: rotateY(120deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(5) {
-        transform: rotateY(160deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(6) {
-        transform: rotateY(200deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(7) {
-        transform: rotateY(240deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(8) {
-        transform: rotateY(280deg) translateZ(288px);
-        height: 210px;
-    }
-
-    #carousel figure:nth-child(9) {
-        transform: rotateY(320deg) translateZ(288px);
-        height: 210px;
-    }
-
-    .box-img {
-        border-radius: 20px 10px 20px 10px;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        position: relative;
-    }
-
-    .label-imgCarousel {
-        position: absolute;
-        bottom: 5px;
-        left: 5px;
-        padding: 2px;
-        background-color: #333333bf;
-        color: white;
-        font-size: 14px;
-        border-radius: 20px 10px 20px 10px;
-    }
+#section-vetrina{
+    background-color: #F6EEE0;
+    padding-bottom: 70px;
 
     #title-section-carousel {
         font-size: 60px;
@@ -278,21 +171,54 @@ export default {
         text-align: end;
     }
 
-    // #box-mobile-img{
-    //     overflow: scroll;
-    // }
+    #slider-evidenza {
+        width: 100%;
 
-    @keyframes rotation {
-        from {
-            transform: rotateY(0deg);
-        }
+        .card-vetrina {
+            position: relative;
+            margin: 0 20px;
+            width: 400px;
+            height: 300px;
+            border-radius: 20px 10px 20px 10px;
 
-        to {
-            transform: rotateY(360deg);
+            img {
+                border-radius: 20px 10px 20px 10px;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .card-info {
+                position: absolute;
+                bottom: 10px;
+                left: 5px;
+
+                border-radius: 20px 10px 20px 10px;
+                background-color:#E7A117;
+                color: white;
+                padding: 5px 10px;
+                font-weight: 900;
+            }
+            .card-vote {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+                border-radius: 20px 10px 20px 10px;
+                background-color:#E7A117;
+                color: white;
+                padding: 4px 8px;
+                font-weight: 900;
+                font-size: 20px;               
+
+                .fa-star {
+                    // color: #E7A117; 
+                    color: white;
+
+                }
+            }
         }
     }
-
-}
+}    
 
 //dark-blue #1d1b2c
 //gold #E7A117
@@ -350,15 +276,5 @@ export default {
         }
     }
 
-    @media screen and (min-width: 600px) {
-        #section{
-        height: 40vh;
-        } 
-    }
-
-    @media screen and (min-width: 900px) {
-        #section{
-        height: 40vh;
-        } 
-    }
+   
 </style>
