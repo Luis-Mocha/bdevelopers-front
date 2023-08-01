@@ -98,11 +98,12 @@ export default {
         <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
 
         <div class="flex-filters d-flex flex-wrap" >
-            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-3" @click="toggleFilter(elem.id)">
+            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="toggleFilter(elem.id)">
                 <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
                 <span>{{ elem.name }}</span>
             </div>
-            <div class="filter-box search-btn mx-4 mb-2 col-2" @click="goSelectedFields()">
+            <div class="filter-box search-btn mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="goSelectedFields()">
+                <i class="fa-solid fa-magnifying-glass fa-xl me-2" style="color: #ffffff;"></i>
                 <span>Cerca</span>
             </div>
         </div>

@@ -40,11 +40,11 @@ export default {
 <template>
     <div id="section-1">
         <h1 class="d-lg-none">Abbiamo costruito<br /> una nuova casa per le tue idee</h1>
-        <div id="description-jumbo">
+        <!-- <div id="description-jumbo">
             <span class="title-description">&lt;My_developer/&gt;</span><br />
             <span>è il posto ideale per trasformare la tua idea in un progetto reale, </span>
             <span>qui troverai lo sviluppatore che stai cercando!</span>
-        </div>
+        </div> -->
 
         <div class="wrap d-none d-lg-block">
             <div class="line">
@@ -175,31 +175,31 @@ export default {
         transition: ease-out .6s;
     }
 
-    #description-jumbo {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        height: 15%;
-        width: 100%;
-        background-color: #1d1b2c;
-        border-radius: 20px 0 0 0;
-        padding: 10px 30px;
+    // #description-jumbo {
+    //     position: absolute;
+    //     bottom: 0;
+    //     right: 0;
+    //     height: 15%;
+    //     width: 100%;
+    //     background-color: #1d1b2c;
+    //     border-radius: 20px 0 0 0;
+    //     padding: 10px 30px;
 
-        // border: 1px solid #E7A117;
-        .title-description {
-            font-family: 'Anton', sans-serif;
-            color: #E7A117;
-            font-size: 18px;
-            padding-top: 10px;
-            padding-left: 10px;
-        }
+    //     // border: 1px solid #E7A117;
+    //     .title-description {
+    //         font-family: 'Anton', sans-serif;
+    //         color: #E7A117;
+    //         font-size: 18px;
+    //         padding-top: 10px;
+    //         padding-left: 10px;
+    //     }
 
-        span {
-            font-family: 'Montserrat', sans-serif;
-            color: #F6EEE0;
-            font-size: 12px;
-        }
-    }
+    //     span {
+    //         font-family: 'Montserrat', sans-serif;
+    //         color: #F6EEE0;
+    //         font-size: 12px;
+    //     }
+    //}
 }
 
 @media screen and (min-width: 700px) {
@@ -218,31 +218,31 @@ export default {
         //     transition: ease-out .6s;
         // }
 
-        #description-jumbo {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            height: 12%;
-            width: 50%;
-            background-color: #1d1b2c;
-            border-radius: 20px 0 0 0;
-            padding: 10px 30px;
+        // #description-jumbo {
+        //     position: absolute;
+        //     bottom: 0;
+        //     right: 0;
+        //     height: 12%;
+        //     width: 50%;
+        //     background-color: #1d1b2c;
+        //     border-radius: 20px 0 0 0;
+        //     padding: 10px 30px;
 
-            // border: 1px solid #E7A117;
-            .title-description {
-                font-family: 'Anton', sans-serif;
-                color: #E7A117;
-                font-size: 22px;
-                padding-top: 10px;
-                padding-left: 10px;
-            }
+        //     // border: 1px solid #E7A117;
+        //     .title-description {
+        //         font-family: 'Anton', sans-serif;
+        //         color: #E7A117;
+        //         font-size: 22px;
+        //         padding-top: 10px;
+        //         padding-left: 10px;
+        //     }
 
-            span {
-                font-family: 'Montserrat', sans-serif;
-                color: #F6EEE0;
-                font-size: 16px;
-            }
-        }
+        //     span {
+        //         font-family: 'Montserrat', sans-serif;
+        //         color: #F6EEE0;
+        //         font-size: 16px;
+        //     }
+        // }
     }
 }
 
@@ -311,31 +311,31 @@ export default {
             transition: ease-out .6s;
         }
 
-        #description-jumbo {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            height: 15%;
-            width: 40%;
-            background-color: #1d1b2c;
-            border-radius: 20px 0 0 0;
-            padding: 10px 30px;
+        // #description-jumbo {
+        //     position: absolute;
+        //     bottom: 0;
+        //     right: 0;
+        //     height: 15%;
+        //     width: 40%;
+        //     background-color: #1d1b2c;
+        //     border-radius: 20px 0 0 0;
+        //     padding: 10px 30px;
 
-            // border: 1px solid #E7A117;
-            .title-description {
-                font-family: 'Anton', sans-serif;
-                color: #E7A117;
-                font-size: 35px;
-                padding-top: 10px;
-                padding-left: 10px;
-            }
+        //     // border: 1px solid #E7A117;
+        //     .title-description {
+        //         font-family: 'Anton', sans-serif;
+        //         color: #E7A117;
+        //         font-size: 35px;
+        //         padding-top: 10px;
+        //         padding-left: 10px;
+        //     }
 
-            span {
-                font-family: 'Montserrat', sans-serif;
-                color: #F6EEE0;
-                font-size: 20px;
-            }
-        }
+        //     span {
+        //         font-family: 'Montserrat', sans-serif;
+        //         color: #F6EEE0;
+        //         font-size: 20px;
+        //     }
+        // }
     }
 
 
