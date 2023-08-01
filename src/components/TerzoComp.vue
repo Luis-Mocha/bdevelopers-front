@@ -47,9 +47,13 @@ export default {
     padding-bottom: 1.5rem;
     }
 
-    h3, h3 i {
-        color: #55423d;
+    h3 {
+        color: #86530A;
         line-height: 2.5rem;
+    }
+
+    h3 i {
+        color: #F6EEE0;
     }
 
     p {
