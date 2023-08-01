@@ -270,16 +270,15 @@ export default {
 
                 <div class="card-row">
                     <!-- ProfileCard -->
-                    <div v-for="(element, index) in this.profiles" :key="index"
+                    <router-link v-for="(element, index) in this.profiles" :key="index"
+                        :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }"
                         class="profile-card d-flex flex-column flex-lg-row">
                         <!-- IMMAGINE CARD -->
-                        <router-link :to="{ name: 'singleDeveloper', params: { dev_id: element.profile_id } }"
-                            :class="(index % 2 === 0) ? 'order-1' : 'order-2'">
-                            <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`"
-                                alt="Immagine Profilo" class="card-img">
-                            <img v-else src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
-                                alt="Immagine Profilo" class="card-img">
-                        </router-link>
+
+                        <img v-if="element.profile_image" :src="`${baseUrlStorage}${element.profile_image}`"
+                            alt="Immagine Profilo" class="card-img" :class="(index % 2 === 0) ? 'order-1' : 'order-2'">
+                        <img v-else src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png"
+                            alt="Immagine Profilo" class="card-img" :class="(index % 2 === 0) ? 'order-1' : 'order-2'">
 
                         <!-- INFORMAZIONI CARD -->
                         <div class="card-info" :class="(index % 2 === 0) ? 'order-2' : 'order-1'">
@@ -312,8 +311,7 @@ export default {
                                 &rdquo;
                             </div>
                         </div>
-
-                    </div>
+                    </router-link>
                 </div>
             </div>
 
@@ -442,6 +440,8 @@ export default {
                 margin-bottom: 25px;
                 width: 80%;
                 min-height: 250px;
+                text-decoration: none;
+                color: #1d1b2c;
 
                 .card-img {
                     cursor: pointer;
