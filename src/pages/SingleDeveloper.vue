@@ -125,7 +125,7 @@ export default {
                 <div class="col-lg-4">
                     <div class="card m-auto text-center mb-4 rounded-4  border-0" data-aos="slide-right"
                         data-aos-duration="1500">
-                        <img class=" w-50 m-auto mb-3 mt-4 profile-img"
+                        <img class="m-auto mb-3 mt-4 profile-img"
                             :src="`${baseUrlStorage}${singleProfile.profile_image}`" alt="">
                         <div class="d-flex justify-content-center mb-3">
                             <h2> {{ singleProfile.name }} </h2>
