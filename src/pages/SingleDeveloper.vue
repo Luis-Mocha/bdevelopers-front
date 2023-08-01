@@ -150,9 +150,9 @@ export default {
                                 data-bs-whatever="@getbootstrap">Scrivi un messaggio</button>
                         </div>
                     </div>
-                    <div class="card mb-4 border-0 rounded-3 " data-aos="slide-right" data-aos-duration="1500">
+                    <div class="card mb-4 border-0 rounded-3" data-aos="slide-right" data-aos-duration="1500">
                         <ul class="list-group list-group-flush rounded-3">
-                            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                            <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-bot">
                                 <i class="fa-brands fa-linkedin fa-lg text-primary"></i>
                                 <p class="mb-0">{{ singleProfile.linkedin_url }}</p>
                             </li>
@@ -263,7 +263,6 @@ export default {
                             <div class="card mb-4 card-recensioni border-custom" data-aos="slide-left"
                                 data-aos-duration="1500">
                                 <div class="p-3">
-
                                     <div class="card-title">
                                         <h2 class="mb-0">RECENSIONI</h2>
                                         <div class="mb-3 text-capitalize">voto medio:
@@ -275,7 +274,8 @@ export default {
                                     </div>
 
                                     <div v-for="(elem, index) in singleProfile.reviews" :key="index"
-                                        class="border mb-4 p-3 rounded-4" data-aos="slide-left" data-aos-duration="1500">
+                                        class="border-review mb-4 p-3 rounded-4" data-aos="slide-left"
+                                        data-aos-duration="1500">
                                         <div class="row">
                                             <div class="col-sm-3 d-flex mb-3">
                                                 <h3 class="mb-2 text-uppercase fw-semibold fs-5">{{ elem.name }}</h3>
@@ -414,7 +414,7 @@ export default {
 
 <style lang="scss" scoped>
 #single-developer {
-
+    background-color: #F6EEE0;
     font-family: 'Space Grotesk', sans-serif;
 
     .profile-img {
@@ -426,7 +426,23 @@ export default {
     }
 
     .card {
-        border: 1px solid #1d1b2c;
+        background-color: #F6EEE0;
+
+        li {
+            background-color: #F6EEE0;
+        }
+
+        .border-bot {
+            border-bottom: 1px solid #1d1b2c;
+        }
+
+        hr {
+            color: #1d1b2c;
+        }
+
+        .border-review {
+            border: 1px solid #1d1b2c;
+        }
 
     }
 
@@ -579,4 +595,5 @@ export default {
     .CRM {
         background-color: black;
     }
-}</style>
+}
+</style>
