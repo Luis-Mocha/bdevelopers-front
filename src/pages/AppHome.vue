@@ -93,22 +93,24 @@ export default {
 <template>
     <PrimoComp />
 
-    <div id="section-filters" class="container my-5">
+    <div id="section-filters" class="py-5">
 
-        <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
+        <div class="container">
+            <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
 
-        <div class="flex-filters d-flex flex-wrap">
-            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`"
-                class="filter-box mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="toggleFilter(elem.id)">
-                <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
-                <span>{{ elem.name }}</span>
-            </div>
-            <div class="filter-box search-btn mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="goSelectedFields()">
-                <i class="fa-solid fa-magnifying-glass fa-xl me-2" style="color: #ffffff;"></i>
-                <span>Cerca</span>
+            <div class="flex-filters d-flex flex-wrap">
+                <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`"
+                    class="filter-box mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="toggleFilter(elem.id)">
+                    <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
+                    <span>{{ elem.name }}</span>
+                </div>
+                <div class="filter-box search-btn mx-4 mb-2 col-10 col-md-5 col-lg-3" @click="goSelectedFields()">
+                    <i class="fa-solid fa-magnifying-glass fa-xl me-2" style="color: #ffffff;"></i>
+                    <span>Cerca</span>
+                </div>
             </div>
         </div>
-
+        
     </div>
 
     <div id="section">
@@ -276,6 +278,7 @@ export default {
 //dark-blue #1d1b2c
 //gold #E7A117
 #section-filters {
+    background-color: #F6EEE0;
     h2 {
         // color: #1d1b2c;
         // margin-bottom: 30px;
