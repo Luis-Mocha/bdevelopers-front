@@ -39,13 +39,6 @@ export default {
         spinner.setAttribute("style","-webkit-transform: rotateY("+ this.angle +"deg); -moz-transform: rotateY("+ this.angle +"deg); transform: rotateY("+ this.angle +"deg);");
         },
 
-        // tullio(){
-        //     setInterval(function(){
-        //         this.galleryspin(false)
-        //     } , 1000);
-
-        //},
-
         getProfiles() {
             
             const params = {
@@ -71,13 +64,13 @@ export default {
         },
         getClass(param) {
             const classMap = {
-                sviluppo_web: 'sviluppo-web',
-                gaming: 'gaming',
-                cyber_security: 'cyber-security',
-                app_mobile: 'app-mobile',
-                blockchain: 'blockchain',
-                machine_learning: 'machine-learning',
-                crm: 'CRM',
+                sviluppo_web: 'fa-solid fa-globe fa-2xl',
+                gaming: 'fa-solid fa-gamepad fa-2xl',
+                cyber_security: 'fa-solid fa-shield-halved fa-2xl',
+                app_mobile: 'fa-solid fa-mobile-screen fa-2xl',
+                blockchain: 'fa-solid fa-link fa-2xl',
+                machine_learning: 'fa-solid fa-brain fa-2xl',
+                crm: 'fa-solid fa-computer fa-2xl',
             };
             return classMap[param];
         },
@@ -111,7 +104,8 @@ export default {
                 <div class="container-carousel">
                     <div id="carousel">
                         <figure class="box-img" v-for="(elem, index) in this.profiles">
-                            <router-link :to="{ name: 'singleDeveloper', params: { dev_id: elem.profile_id } }">                             <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="">
+                            <router-link :to="{ name: 'singleDeveloper', params: { dev_id: elem.profile_id } }">
+                                <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="">
                                 <div class="label-imgCarousel">
                                     <span class="text-white"><em>{{ elem.name }}</em></span>
                                     <span class="text-white ms-1"> <em>{{ elem.surname }}</em></span>
@@ -130,7 +124,8 @@ export default {
         <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
 
         <div class="flex-filters d-flex flex-wrap" >
-            <div v-for="(elem, index) in this.fields" :key="index" :class="getClass(normalizeFieldName(elem.name))" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-3" @click="toggleFilter(elem.id)">
+            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-3" @click="toggleFilter(elem.id)">
+                <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
                 <span>{{ elem.name }}</span>
             </div>
             <div class="filter-box search-btn mx-4 mb-2 col-2" @click="goSelectedFields()">
