@@ -23,7 +23,7 @@ export default {
                 <span style="color: #F6EEE0;">&lt;My_developer/&gt;</span></h2>
                 <h3 class="my-2"><i class="fa-solid fa-star"></i>Qualità provata</h3>
                 <p class="fs-5">Controlla i campioni di lavoro di qualsiasi professionista, i feedback dei clienti e la verifica dell'identità.</p>
-                <h3 class="my-2"><i class="fa-solid fa-dollar-sign"></i>Nessun costo fino all'assunzione</h3>
+                <h3 class="my-2"><i class="fa-solid fa-dollar-sign"></i>Nessun costo fino all'accettazione della collaborazione</h3>
                 <p class="fs-5">Intervista i tuoi potenziali collaboratori, negozia le tariffe e paga solo per il lavoro che approvi.</p>
                 <h3 class="my-2"><i class="fa-solid fa-check"></i>Sicurezza e protezione</h3>
                 <p class="fs-5">Concentrati sul tuo lavoro, sapendo che
