@@ -171,10 +171,11 @@ export default {
     padding-bottom: 70px;
 
     #title-section-carousel {
-        font-size: 60px;
-        color: #E7A117;
-        font-family: 'Anton', sans-serif;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 48px;
+        color: #1d1b2c;
         text-align: end;
+        padding-bottom: 2rem;
     }
 
     #slider-evidenza {
@@ -234,12 +235,11 @@ export default {
 #section-filters {
     background-color: #F6EEE0;
     h2 {
-        // color: #1d1b2c;
-        // margin-bottom: 30px;
-        font-size: 50px;
-        color: #E7A117;
-        font-family: 'Anton', sans-serif;
+        color: #1d1b2c;
+        font-size: 48px;
+        font-family: 'Space Grotesk', sans-serif;
         text-align: start;
+        padding-bottom: 1rem;
     }
 
     .filter-box {
