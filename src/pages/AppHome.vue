@@ -114,7 +114,7 @@ export default {
         <div class="container">
             <h2 id="title-section-carousel">Qui troverai centinaia di sviluppatori</h2>
            
-            <section class="section-carousell pb-5">
+            <section class="section-carousell pb-5 d-md-block">
                 <div class="container-carousel">
                     <div id="carousel">
                         <figure class="box-img" v-for="(elem, index) in this.profiles">
@@ -129,6 +129,20 @@ export default {
                     </div>
                 </div>
             </section>
+            <section class="d-md-none">
+                <!-- <div id="box-mobile-img" class=" overflow-x-scroll d-flex">
+                    <div class="box-img" v-for="(elem, index) in this.profiles" style="widht: 40%">
+                        <router-link :to="{ name: 'singleDeveloper', params: { dev_id: elem.profile_id } }">
+                            <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="">
+                            <div class="label-imgCarousel">
+                                <span class="text-white"><em>{{ elem.name }}</em></span>
+                                <span class="text-white ms-1"> <em>{{ elem.surname }}</em></span>
+                            </div>    
+                        </router-link>
+                    </div>
+                </div> -->
+            </section>
+
         </div>
 
     </div>
@@ -143,7 +157,7 @@ export default {
 
 <style lang="scss">
 #section{
-    height: 50vh;
+    height: 75vh;
     color: #F6EEE0;
     .fondatori {
         display: table;
@@ -164,8 +178,8 @@ export default {
     }
 
     #carousel {
-        width: 100%;
-        height: 100%;
+        width: 50%;
+        height: 50%;
         position: absolute;
         transform-style: preserve-3d;
         animation: rotation 20s infinite linear;
@@ -177,10 +191,10 @@ export default {
 
     #carousel figure {
         display: block;
-        position: absolute;
+        position: absolute;        
         width: 186px;
         height: 116px;
-        left: 10px;
+        left: -150px;
         top: 10px;
         background: #333333;
         overflow: hidden;
@@ -260,6 +274,10 @@ export default {
         text-align: end;
     }
 
+    // #box-mobile-img{
+    //     overflow: scroll;
+    // }
+
     @keyframes rotation {
         from {
             transform: rotateY(0deg);
@@ -325,5 +343,17 @@ export default {
             text-align: center;
             text-transform: uppercase;
         }
+    }
+
+    @media screen and (min-width: 600px) {
+        #section{
+        height: 40vh;
+        } 
+    }
+
+    @media screen and (min-width: 900px) {
+        #section{
+        height: 40vh;
+        } 
     }
 </style>
