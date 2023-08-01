@@ -101,7 +101,7 @@ header {
             -webkit-text-fill-color: transparent;
             animation: textclip 3.5s linear infinite;
             display: inline-block;
-            font-size: 40px;
+            font-size: 20px;
         }
 
         @keyframes textclip {
@@ -149,6 +149,13 @@ header {
 
     &::after {
         content: '/>';
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .animate-character {
+
+        font-size: 40px !important;
     }
 }
 </style>
