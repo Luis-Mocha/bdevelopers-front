@@ -155,7 +155,7 @@ header {
 @media screen and (min-width: 992px) {
     .animate-character {
 
-        font-size: 40px !important;
+        font-size: 30px !important;
     }
 }
 </style>
