@@ -53,17 +53,17 @@
         height: 100vh;
         /* background-color: yellow; */
         background-color: #F6EEE0;
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Space Grotesk', sans-serif;
 
-        font-size: 20px;
+        /* font-size: 20px; */
 
         h2 {
             font-size: 50px;
             font-weight: bold;
 
             span {
-                font-family: 'Anton', sans-serif !important;
-                font-weight: 400;
+                /* font-family: 'Anton', sans-serif !important; */
+                font-weight: 800;
             }
         }
 
