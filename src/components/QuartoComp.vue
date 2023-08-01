@@ -1,8 +1,8 @@
 <script>
 
-    export default {
-        name: 'SecondoComp',
-    }
+export default {
+    name: 'SecondoComp',
+}
 
 
 </script>
@@ -49,164 +49,167 @@
 </template>
 
 <style lang="scss" scoped>
-    #section-4 {
-        height: 100vh;
-        /* background-color: yellow; */
-        background-color: #F6EEE0;
-        font-family: 'Space Grotesk', sans-serif;
+#section-4 {
+    height: 100vh;
+    /* background-color: yellow; */
+    background-color: #E7A117;
+    font-family: 'Space Grotesk', sans-serif;
 
-        /* font-size: 20px; */
+    /* font-size: 20px; */
 
-        h2 {
-            font-size: 50px;
-            font-weight: bold;
+    h2 {
+        font-size: 50px;
+        font-weight: bold;
+        padding-top: 30px !important;
 
-            span {
-                /* font-family: 'Anton', sans-serif !important; */
-                font-weight: 800;
-            }
+        span {
+            /* font-family: 'Anton', sans-serif !important; */
+            font-weight: 800;
         }
+    }
 
-        .h2-mobile {
-            display: none;
-        }
+    .h2-mobile {
+        display: none;
+    }
 
-        .sec-container {
+    .sec-container {
 
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        .div-jumbo {
+            height: 100%;
+            padding-bottom: 50px;
+            width: 80%;
+            /* border: 2px dotted red; */
+            border-radius: 50px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            height: 100%;
+            justify-content: space-between;
 
-            .div-jumbo {
-                height: 100%;
-                padding-bottom: 50px;
-                width: 80%;
-                /* border: 2px dotted red; */
-                border-radius: 50px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
+            .sx {
+                /* background-color: turquoise; */
+                height: 80%;
+                width: 49.5%;
+            }
 
-                .sx {
-                    /* background-color: turquoise; */
-                    height: 80%;
-                    width: 49.5%;
-                }
-
-                .dx {
-                    /* background-attachment: fixed;
+            .dx {
+                /* background-attachment: fixed;
                     background-repeat: no-repeat;*/
 
 
-                    height: 80%;
-                    width: 49.5%;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
+                height: 80%;
+                width: 49.5%;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
 
-                    .dx-top {
-                        height: calc(100% / 4 * 3 - 10px);
-                        background-image: url(https://media.gettyimages.com/id/1137939519/it/foto/giovane-programmatore-afroamericano-che-lavora-su-pc-desktop-in-ufficio.jpg?s=612x612&w=0&k=20&c=FvxKVogTsASr9bfvRWUFxrUmi-6UMiYLIT-WzGztaeI=);
-                        background-size: cover;
-                        background-position: center;
-                        border-radius: 20px;
-                    }
-
-                    .dx-bot {
-                        height: calc(100% / 4);
-                        background-color: rgb(29, 27, 44);
-                        border-radius: 20px;
-                        padding: 10px;
-                        border: 2px solid #E7A117;
-
-                        h4 {
-                            color: #E7A117;
-                            font-family: 'Anton', sans-serif;
-
-                        }
-                    }
+                .dx-top {
+                    height: calc(100% / 4 * 3 - 10px);
+                    background-image: url(https://media.gettyimages.com/id/1137939519/it/foto/giovane-programmatore-afroamericano-che-lavora-su-pc-desktop-in-ufficio.jpg?s=612x612&w=0&k=20&c=FvxKVogTsASr9bfvRWUFxrUmi-6UMiYLIT-WzGztaeI=);
+                    background-size: cover;
+                    background-position: center;
+                    border-radius: 20px;
                 }
 
-                .sx {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
+                .dx-bot {
+                    height: calc(100% / 4);
+                    background-color: rgb(29, 27, 44);
+                    border-radius: 20px;
+                    padding: 10px;
+                    border: 2px solid #E7A117;
 
-                    .bot {
-                        /* background-attachment: fixed;*/
-                        background-repeat: no-repeat;
-                        background-size: cover;
-                        border-radius: 20px;
-                        background-image: url(https://media.gettyimages.com/id/1212006391/it/foto/programmatore-di-computer-che-lavora-a-un-nuovo-programma-software.jpg?s=612x612&w=0&k=20&c=wMvYVSWbbhfp69x2t7fHrQ09GE3R8CU2b0x-w2nMUQA=);
-                    }
-
-                    .top,
-                    .bot {
-                        height: 49%;
-                        width: 100%;
-                    }
-
-                    .top {
-                        background-color: rgb(29, 27, 44);
-                        border: 2px solid #E7A117;
-                        border-radius: 20px;
-                        color: white;
-
-                        ul {
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            flex-wrap: wrap;
-                            padding-left: 0;
-
-                            li {
-                                width: 48%;
-                                height: 48%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                text-align: center;
-                                flex-direction: column;
-                                padding: 10px;
-
-                                i {
-                                    font-size: 35px;
-                                    padding-bottom: 4px;
-                                    color: #E7A117;
-                                }
-
-                                .fa-gem {
-                                    padding-top: 25px;
-                                }
-
-
-                            }
-                        }
-
+                    h4 {
+                        color: #E7A117;
+                        font-family: 'Anton', sans-serif;
 
                     }
                 }
-
             }
+
+            .sx {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .bot {
+                    /* background-attachment: fixed;*/
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    border-radius: 20px;
+                    background-image: url(https://media.gettyimages.com/id/1212006391/it/foto/programmatore-di-computer-che-lavora-a-un-nuovo-programma-software.jpg?s=612x612&w=0&k=20&c=wMvYVSWbbhfp69x2t7fHrQ09GE3R8CU2b0x-w2nMUQA=);
+                }
+
+                .top,
+                .bot {
+                    height: 49%;
+                    width: 100%;
+                }
+
+                .top {
+                    background-color: rgb(29, 27, 44);
+                    border: 2px solid #E7A117;
+                    border-radius: 20px;
+                    color: white;
+
+                    ul {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        flex-wrap: wrap;
+                        padding-left: 0;
+
+                        li {
+                            width: 48%;
+                            height: 48%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            flex-direction: column;
+                            padding: 10px;
+
+                            i {
+                                font-size: 35px;
+                                padding-bottom: 4px;
+                                color: #E7A117;
+                            }
+
+                            .fa-gem {
+                                padding-top: 25px;
+                            }
+
+
+                        }
+                    }
+
+
+                }
+            }
+
         }
-
-
-
     }
 
-    /* tablet */
-    @media all and (max-width:835px) {
 
-        /* .dx .dx-top {
+
+}
+
+/* tablet */
+@media all and (max-width:835px) {
+
+    /* .dx .dx-top {
             display: none !important;
         } */
 
+    #section-4 {
+        .title {
+            padding-top: 80px !important;
+        }
 
-
-
-        #section-4 .sec-container {
+        .sec-container {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -214,7 +217,11 @@
 
             position: relative;
 
+
+
             .div-jumbo {
+
+
                 display: flex;
                 flex-wrap: wrap;
 
@@ -241,7 +248,7 @@
 
                 .dx {
                     width: 80%;
-                    height: 600px;
+                    height: 500px;
                     position: absolute;
                     top: 370px;
                     left: 10%;
@@ -258,42 +265,43 @@
             }
         }
     }
+}
 
 
-    /* mobile */
-    @media all and (max-width:429px) {
+/* mobile */
+@media all and (max-width:429px) {
 
-        .title {
-            display: none;
-        }
+    .title {
+        display: none;
+    }
 
-        .h2-mobile {
-            display: block !important;
-            font-size: 40px !important;
-            padding-top: 15px;
-            text-align: center;
-        }
+    .h2-mobile {
+        display: block !important;
+        font-size: 40px !important;
+        padding-top: 40px;
+        text-align: center;
+    }
 
-        #section-4 .sec-container {
-            .div-jumbo {
-                .sx {
+    #section-4 .sec-container {
+        .div-jumbo {
+            .sx {
 
-                    .top {
-                        height: 50%
-                    }
-                }
-
-                .dx .dx-top {
-                    display: none;
-                }
-
-                .dx .dx-bot {
-                    margin-top: 60px;
-                    height: 200px;
+                .top {
+                    height: 45%
                 }
             }
 
+            .dx .dx-top {
+                display: none;
+            }
+
+            .dx .dx-bot {
+                margin-top: 60px;
+                height: 200px;
+            }
         }
 
     }
+
+}
 </style>
