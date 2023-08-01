@@ -40,13 +40,9 @@ export default {
         },
 
         getProfiles() {
-            
-            const params = {
-            }
 
-            axios.get(`${this.baseUrlApi}profiles`, { params }).then(res => {
+            axios.get(`${this.baseUrlApi}home`).then(res => {
                 this.profiles = res.data.profilesData
-
             })
         },
 
@@ -96,6 +92,23 @@ export default {
 
 <template>
     <PrimoComp/>
+
+    <div id="section-filters" class="container my-5">
+    
+        <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
+
+        <div class="flex-filters d-flex flex-wrap" >
+            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-3" @click="toggleFilter(elem.id)">
+                <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
+                <span>{{ elem.name }}</span>
+            </div>
+            <div class="filter-box search-btn mx-4 mb-2 col-2" @click="goSelectedFields()">
+                <span>Cerca</span>
+            </div>
+        </div>
+
+    </div>
+
     <div id="section">
         <div class="container">
             <h2 id="title-section-carousel">Qui troverai centinaia di sviluppatori</h2>
@@ -115,22 +128,6 @@ export default {
                     </div>
                 </div>
             </section>
-        </div>
-
-    </div>
-
-    <div id="section-filters" class="container my-5">
-    
-        <h2 class="mt-3 mb-4">Cerca uno sviluppatore in base al campo di sviluppo</h2>
-
-        <div class="flex-filters d-flex flex-wrap" >
-            <div v-for="(elem, index) in this.fields" :key="index" :id="`filter-${elem.id}`" class="filter-box mx-4 mb-2 col-3" @click="toggleFilter(elem.id)">
-                <i :class="getClass(normalizeFieldName(elem.name))" class="me-3"></i>
-                <span>{{ elem.name }}</span>
-            </div>
-            <div class="filter-box search-btn mx-4 mb-2 col-2" @click="goSelectedFields()">
-                <span>Cerca</span>
-            </div>
         </div>
 
     </div>
@@ -256,10 +253,10 @@ export default {
     }
 
     #title-section-carousel{
-            font-size: 60px;
-            color: #E7A117;
-            font-family: 'Anton', sans-serif;
-            text-align: center;
+        font-size: 60px;
+        color: #E7A117;
+        font-family: 'Anton', sans-serif;
+        text-align: end;
     }
 
     @keyframes rotation {
@@ -278,8 +275,12 @@ export default {
 //gold #E7A117
 #section-filters{
         h2 {
-            color: #1d1b2c;
-            margin-bottom: 30px;
+            // color: #1d1b2c;
+            // margin-bottom: 30px;
+            font-size: 50px;
+            color: #E7A117;
+            font-family: 'Anton', sans-serif;
+            text-align: start;
         }
         
         .filter-box {
@@ -299,9 +300,15 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
+
+            &:hover {
+                background-color: #E7A117;
+                color: #1d1b2c;
+                border: 1px solid #1d1b2c;
+            }
         }
         .filter-box.selected {
-            background-color: rgb(53, 136, 53);
+            background-color: rgb(67, 167, 67);
             &::after {
                 content: "\2713";
                 color: white;
@@ -313,6 +320,7 @@ export default {
         .filter-box.search-btn {
             background-color: #1d1b2c;
             color: #E7A117;
+            font-weight: 600;
             text-align: center;
             text-transform: uppercase;
         }
