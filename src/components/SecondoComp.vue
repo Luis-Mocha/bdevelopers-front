@@ -37,7 +37,7 @@ export default {
         //height: 100vh;
         background-color: #1d1b2c;
         color: #F6EEE0;
-        padding: 1rem 0;
+        padding: 2rem 0;
     }
 
     h2 {

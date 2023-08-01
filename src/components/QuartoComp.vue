@@ -54,7 +54,7 @@ export default {
     /* background-color: yellow; */
     background-color: #E7A117;
     font-family: 'Space Grotesk', sans-serif;
-
+    padding-top: 1rem;
     /* font-size: 20px; */
 
     h2 {
