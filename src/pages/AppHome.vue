@@ -143,6 +143,7 @@ export default {
 <style lang="scss">
 #section {
     height: 50vh;
+    background-color: #F6EEE0;
     color: #F6EEE0;
 
     .fondatori {

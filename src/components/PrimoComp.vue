@@ -205,6 +205,7 @@ export default {
 @media screen and (min-width: 700px) {
     #section-1 {
         height: calc(100vh - 60px);
+        background-color: #F6EEE0;
         background-image: url(https://images8.alphacoders.com/130/1306511.jpeg);
         position: relative;
         border-bottom: 2px solid #E7A117;
