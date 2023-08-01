@@ -265,12 +265,12 @@ export default {
                                 <div class="p-3">
                                     <div class="card-title">
                                         <h2 class="mb-0">RECENSIONI</h2>
-                                        <div class="mb-3 text-capitalize">voto medio:
-                                            {{ parseFloat(singleProfile.average_vote).toFixed(1) }}
+                                        <div class="mb-3 text-capitalize" v-if="singleProfile.reviews.length > 0">
+                                            voto medio: {{ parseFloat(singleProfile.average_vote).toFixed(1) }}
                                         </div>
                                     </div>
-                                    <div v-if="singleProfile.reviews == null">
-                                        Non ci sono recensioni
+                                    <div v-if="singleProfile.reviews.length == 0">
+                                        Questo profilo non ha ancora recensioni. Sii il primo a lasciarne una!
                                     </div>
 
                                     <div v-for="(elem, index) in singleProfile.reviews" :key="index"
