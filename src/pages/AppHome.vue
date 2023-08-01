@@ -137,8 +137,13 @@ export default {
                         <span>{{ elem.name }}</span>
                         <span class="ms-2">{{ elem.surname }}</span>
                     </div>
-                    <div class="card-vote">
-                        {{ elem.average_vote }}<i class="fa-solid fa-star"></i>
+                    <div class="card-vote" :class="elem.average_vote == 0 ? 'green': ''">
+                        <div v-if="elem.average_vote > 0">
+                            {{ elem.average_vote }}<i class="fa-solid fa-star"></i>
+                        </div>
+                        <div v-else>
+                            New!
+                        </div>
                     </div>
                 </router-link>
             
@@ -216,6 +221,9 @@ export default {
                     color: white;
 
                 }
+            }
+            .card-vote.green {
+                background-color: green;
             }
         }
     }
