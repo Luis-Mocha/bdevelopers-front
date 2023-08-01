@@ -147,9 +147,9 @@ export default {
 
     </div>
     
+    <QuartoComp/>
     <SecondoComp/>
     <TerzoComp/>
-    <QuartoComp/>
     <QuintoComp/>
 
 
