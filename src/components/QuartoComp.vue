@@ -57,6 +57,10 @@ export default {
     padding-top: 1rem;
     /* font-size: 20px; */
 
+    p {
+        font-size: 20px;
+    }
+
     h2 {
         font-size: 50px;
         font-weight: bold;
