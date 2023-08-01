@@ -346,7 +346,7 @@ export default {
                                 </div>
                                 <div class="mb-3">
                                     <label for="select-vote" class="col-form-label">Voto</label>
-                                    <select name="vote" id="select-vote" class="form-select text-warning"
+                                    <select name="vote" id="select-vote" class="form-select text-warning form-control"
                                         v-model="this.review.vote" required>
                                         <option class="text-warning" value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
                                         <option class="text-warning" value="4">&#9733;&#9733;&#9733;&#9733;&#9734;</option>
@@ -594,6 +594,15 @@ export default {
 
     .CRM {
         background-color: black;
+    }
+}
+
+
+.form-control {
+    &:focus { 
+        outline: none !important;
+        border-color: #E7A117;
+        box-shadow: 0 0 10px #E7A117;
     }
 }
 </style>
