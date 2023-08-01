@@ -130,7 +130,8 @@ export default {
             </h2>
 
             <div id="slider-evidenza" @wheel.prevent="scrollHorizontal($event, 'slider-evidenza')" class="slider row flex-nowrap overflow-x-hidden"> 
-                <div v-for="(elem, index) in this.profiles" class="card-vetrina">
+                
+                <router-link v-for="(elem, index) in this.profiles" class="card-vetrina"  :to="{ name: 'singleDeveloper', params: { dev_id: elem.profile_id } }">
                     <img :src="`${baseUrlStorage}/${elem.profile_image}`" alt="" >
                     <div class="card-info">
                         <span>{{ elem.name }}</span>
@@ -139,7 +140,7 @@ export default {
                     <div class="card-vote">
                         {{ elem.average_vote }}<i class="fa-solid fa-star"></i>
                     </div>
-                </div>
+                </router-link>
             
                 
             </div>
