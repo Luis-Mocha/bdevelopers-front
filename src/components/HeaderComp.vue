@@ -102,7 +102,6 @@ header {
             animation: textclip 3.5s linear infinite;
             display: inline-block;
             font-size: 40px;
-            cursor: pointer;
         }
 
         @keyframes textclip {
