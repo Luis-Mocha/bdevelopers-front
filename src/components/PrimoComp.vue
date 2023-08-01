@@ -39,7 +39,6 @@ export default {
 
 <template>
     <div id="section-1">
-        <!-- <h1>&lt;My_developer/&gt;</h1> -->
         <h1 class="d-lg-none">Abbiamo costruito<br /> una nuova casa per le tue idee</h1>
         <div id="description-jumbo">
             <span class="title-description">&lt;My_developer/&gt;</span><br />
@@ -111,7 +110,7 @@ export default {
 //font-family: 'Montserrat', sans-serif;
 #section-1 {
     height: calc(100vh - 60px);
-    background-image: url(https://media.gettyimages.com/id/1081869160/it/foto/ha-abbastanza-familiarit%C3%A0-con-il-mondo-avanzato.jpg?s=2048x2048&w=gi&k=20&c=-3saErwF6vjhWbmqhX3qUvy0NfZy6SvLvo5lJaztlg0=);
+    background-image: url(https://images8.alphacoders.com/130/1306511.jpeg);
     position: relative;
     border-bottom: 2px solid #E7A117;
     background-size: cover;
@@ -122,13 +121,14 @@ export default {
         position: absolute;
         top: 100px;
         left: 50px;
+        text-transform: uppercase;
         font-family: 'Anton', sans-serif;
     }
 
     .wrap {
         position: absolute;
         top: 200px;
-        left: -150px;
+        // left: -150px;
         font-family: 'Anton', sans-serif;
         font-size: 60px;
 
@@ -205,18 +205,18 @@ export default {
 @media screen and (min-width: 700px) {
     #section-1 {
         height: calc(100vh - 60px);
-        background-image: url(https://media.gettyimages.com/id/1081869160/it/foto/ha-abbastanza-familiarit%C3%A0-con-il-mondo-avanzato.jpg?s=2048x2048&w=gi&k=20&c=-3saErwF6vjhWbmqhX3qUvy0NfZy6SvLvo5lJaztlg0=);
+        background-image: url(https://images8.alphacoders.com/130/1306511.jpeg);
         position: relative;
         border-bottom: 2px solid #E7A117;
         background-size: cover;
 
-        span {
-            display: inline-block;
-            font-size: 4vw;
-            text-transform: uppercase;
-            line-height: .8;
-            transition: ease-out .6s;
-        }
+        // span {
+        //     display: inline-block;
+        //     font-size: 4vw;
+        //     text-transform: uppercase;
+        //     line-height: .8;
+        //     transition: ease-out .6s;
+        // }
 
         #description-jumbo {
             position: absolute;
@@ -250,7 +250,7 @@ export default {
 
     #section-1 {
         height: calc(100vh - 60px);
-        background-image: url(https://media.gettyimages.com/id/1081869160/it/foto/ha-abbastanza-familiarit%C3%A0-con-il-mondo-avanzato.jpg?s=2048x2048&w=gi&k=20&c=-3saErwF6vjhWbmqhX3qUvy0NfZy6SvLvo5lJaztlg0=);
+        background-image: url(https://images8.alphacoders.com/130/1306511.jpeg);
         position: relative;
         border-bottom: 2px solid #E7A117;
         background-size: cover;
