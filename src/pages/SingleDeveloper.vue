@@ -171,7 +171,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Nome</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0 text-capitalize">{{ singleProfile.name }}</p>
+                                    <p class="mb-0 text-capitalize">{{ singleProfile.name }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -180,7 +180,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Cognome</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0 text-capitalize">{{ singleProfile.surname }}</p>
+                                    <p class="mb-0 text-capitalize">{{ singleProfile.surname }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -189,7 +189,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Email</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ singleProfile.email }}</p>
+                                    <p class="mb-0">{{ singleProfile.email }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -198,7 +198,7 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Indirizzo</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0 text-capitalize">{{ singleProfile.address }}</p>
+                                    <p class="mb-0 text-capitalize">{{ singleProfile.address }}</p>
                                 </div>
                             </div>
                             <hr>
@@ -207,7 +207,8 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Data di nascita</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ singleProfile.birth_date }}</p>
+                                    <p class="mb-0" v-if="singleProfile.birth_date">{{ singleProfile.birth_date }}</p>
+                                    <p v-else class="fst-italic text-secondary">non disponibile</p>
                                 </div>
                             </div>
                             <hr>
@@ -216,7 +217,8 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Numero di telefono</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0">{{ singleProfile.phone_number }}</p>
+                                    <p class="mb-0" v-if="singleProfile.phone_number">{{ singleProfile.phone_number }}</p>
+                                    <p v-else class="fst-italic text-secondary">non disponibile</p>
                                 </div>
                             </div>
                             <hr>
@@ -225,10 +227,12 @@ export default {
                                     <p class="mb-0 text-uppercase fw-semibold">Tecnologie di sviluppo</p>
                                 </div>
                                 <div class="col-sm-9 d-flex">
-                                    <div v-for="(elem, index) in singleProfile.technology_names">
-                                        <span :key="index" class="text-muted mb-0">{{ elem }}</span>
+                                    <div v-for="(elem, index) in singleProfile.technology_names" v-if="singleProfile.technology_names">
+                                        <span :key="index" class="mb-0">{{ elem }}</span>
                                         <span v-if="index !== singleProfile.technology_names.length - 1" class="me-2">,</span>
                                     </div>
+
+                                    <p v-else class="fst-italic text-secondary">non disponibile</p>
                                 </div>
                             </div>
                             <hr>
@@ -238,11 +242,14 @@ export default {
                                 </div>
                                 <div class="col-sm-9">
 
-                                    <button class="btn-cv">
-                                        <a class="text-muted mb-0" :href="`${baseUrlStorage}${singleProfile.curriculum}`"
+                                    <button class="btn-cv" v-if="singleProfile.curriculum">
+                                        <a class="mb-0" :href="`${baseUrlStorage}${singleProfile.curriculum}`"
                                             target="_blank" rel="noopener noreferrer"><i
                                                 class="fa-solid fa-file-pdf"></i><span class="ms-1">Scarica</span></a>
                                     </button>
+
+                                    <p v-else class="fst-italic text-secondary">non disponibile</p>
+
                                 </div>
                             </div>
                         </div>
