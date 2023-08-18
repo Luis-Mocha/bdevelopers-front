@@ -1,10 +1,10 @@
 # My Developer - Front
 
-> Il progetto ***MyDeveloper*** simula una web app che permette l'interazione tra un **utente interessato** (**UI**) e uno **sviluppatore registrato** (**SR**):
-> - l'utente interessato ha la possibilità di cercare e contattare uno sviluppatore professionista, al fine di richiedere una consultazione o un servizio professionale. 
-> - lo sviluppatore registrato può creare un profilo individuale, personalizzandolo tramite la condivisione delle proprie capacità professionali e delle informazioni personali che ritiene più adatte.
+Il progetto ***MyDeveloper*** simula una web app che permette l'interazione tra un **utente interessato** (**UI**) e uno **sviluppatore registrato** (**SR**):
+- l'utente interessato ha la possibilità di cercare e contattare uno sviluppatore professionista, al fine di richiedere una consultazione o un servizio professionale. 
+- lo sviluppatore registrato può creare un profilo individuale, personalizzandolo tramite la condivisione delle proprie capacità professionali e delle informazioni personali che ritiene più adatte.
 
-> Nello specico il progetto si divide nella sezione dedicata all'**UI**, il cui sviluppo è contenuto in questa repository, e nella sezione di "back-office" dedicata allo **SR**, il cui sviluppo è contenuto nella repository [MyDeveloper-back](https://github.com/Luis-Mocha/bdevelopers-back).
+Nello specico il progetto si divide nella sezione dedicata all'**UI**, il cui sviluppo è contenuto in questa repository, e nella sezione di "back-office" dedicata allo **SR**, il cui sviluppo è contenuto nella repository [MyDeveloper-back](https://github.com/Luis-Mocha/bdevelopers-back).
 
 ---
 
