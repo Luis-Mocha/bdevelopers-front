@@ -32,4 +32,4 @@ Ogni risultato permette l’accesso alla pagina di dettaglio dello sviluppatore.
 
 Permette di vedere il cv dello sviluppatore e le informazioni riguardanti, come indirizzo, email, tecnologie conosciute. 
 È possibile inviare un messaggio allo sviluppatore per chiederne la disponibilità e scrivere
-una recensione con voto e descrizione. Inoltre è possibile visualizzare le recensioni inserite da altri utenti e il conseguente voto medio..
+una recensione con voto e descrizione. Inoltre è possibile visualizzare le recensioni inserite da altri utenti e il conseguente voto medio.
