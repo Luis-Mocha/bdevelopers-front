@@ -16,19 +16,19 @@ Una volta aperta la pagina dello sviluppatore di interesse l'utente ha la possib
 
 Ogni pagina è resa ***responsive*** in modo da adattarsi agli schermi di diversi dispositivi. Questo è risultato è ottenuto tramite l'utilizzo di classi responsive **Bootstrap** e di **Media Query** personalizzate.
 
-##### - Home Page
+#### - Home Page
 
 Presenta una *hero section* dinamica e sezioni che evidenziano i vantaggi e l'utilizzo della piattaforma.
 Mostra in primo piano gli sviluppatori in evidenza e ne permette un accesso veloce alle pagine dettaglio. Inoltre offre la possibilità di ricercare uno sviluppatore in base al campo di sviluppo *(l'utente viene reidirizzato alla pagina ricerca sviluppatori)*.
 *(Il backoffice permette allo sviluppatore registrato di mettere **in evidenza** il proprio profilo tramite un sistema di pagamento)*
 
-##### - Pagina ricerca sviluppatori
+#### - Pagina ricerca sviluppatori
 
 Permette di visualizzare tutti gli sviluppatori iscritti al sito e di effettuare una ricerca avanzata senza il refresh della pagina, applicando dei filtri. Ogni cambiamento di input va a modificare i campi utili alla ricerca nell’url (ad esempio: /developers?fields=web). Dopo ogni cambiamento viene fatta una chiamata ajax con i parametri presenti nella URL.
 I risultati vengono ordinati in base alla media dei voti ricevuti e del numero di recensione. Gli sviluppatori che hanno effettuato l'acquisto di un *piano premium* risultato comunque tra i primi risultati.
 Ogni risultato permette l’accesso alla pagina di dettaglio dello sviluppatore.
 
-##### - Pagina Sviluppatore
+#### - Pagina Sviluppatore
 
 Permette di vedere il cv dello sviluppatore e le informazioni riguardanti, come indirizzo, email, tecnologie conosciute. 
 È possibile inviare un messaggio allo sviluppatore per chiederne la disponibilità e scrivere
